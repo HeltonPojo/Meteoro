@@ -1,13 +1,10 @@
--- Gera��o de Modelo f�sico
--- Sql ANSI 2003 - brModelo.
-
-
-
 CREATE TABLE Usuario (
 Id INTEGER PRIMARY KEY,
 Email VARCHAR(50),
 Senha VARCHAR(20),
-image_path VARCHAR(10),
+image_path VARCHAR(20),
+horas TIME,
+Cargo VARCHAR(50),
 esta_na_sede INTEGER
 )
 
@@ -16,6 +13,6 @@ Id INTEGER PRIMARY KEY,
 Entrada DATETIME,
 Saida DATETIME,
 IdUsuario INTEGER,
-FOREIGN KEY(Id) REFERENCES Usuario (Id)
+FOREIGN KEY(IdUsuario) REFERENCES Usuario (Id)
 )
 

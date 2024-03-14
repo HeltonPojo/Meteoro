@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 function Login(){
     const [email, setEmail] = useState('')
@@ -7,6 +8,16 @@ function Login(){
 
     function handelSubmit(event){
         event.preventDefault();
+        axios.post('http://localhost:8081/login', {email, senha})
+        .then(res => {
+            console.log(res);
+            /*if (res.data.isAdmin) {
+                history.push('/admin');
+              } else {
+                history.push('/user');
+              }*/
+        })
+        .catch(err => console.log(err));
     }
 
     return (
@@ -19,7 +30,7 @@ function Login(){
                     </div>
                     <div className='mb-3'>
                     <label htmlFor="senha">Senha</label>
-                        <input type="senha" placeholder='Senha' className='form-control' onChange={e => setSenha(e.target.value)}></input>
+                        <input type="password" placeholder='Senha' className='form-control' onChange={e => setSenha(e.target.value)}></input>
                     </div>
                     <button className='btn btn-success'>Entrar</button>
                 </form>
