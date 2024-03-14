@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Router, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Login from './Login';
 import Usuario from './Usuario';
 import Admin from './Admin';
@@ -8,14 +8,12 @@ import Presenca from './Presenca';
 
 function App(){
   return(
-    <dic><Login/></dic>
-    /*
-    <Router>
-      <Routes>
-        <Route path='/' element={<Login/>}/>
-      </Routes>
-    </Router>
-    */
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/membro" element={<Usuario />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/presenca" element={<Admin />} />
+    </Routes>
   )
 }
 export default App;

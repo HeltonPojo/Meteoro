@@ -6,19 +6,18 @@ import { useNavigate } from 'react-router-dom';
 function Login(){
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-    //const navigate = useNavigate()
+    const navigate = useNavigate()
 
     function handelSubmit(event){
         event.preventDefault();
         axios.post('http://localhost:8081/login', {email, senha})
         .then(res => {
             console.log(res);
-            /*
-              if (res.data.isAdmin) {
-                navigate('admin');
-              } else {
-                navigate('membro');
-              }*/
+            if (res.data.isAdmin) {
+            navigate('admin');
+            } else {
+            navigate('membro');
+            }
         })
         .catch(err => console.log(err));
     }
