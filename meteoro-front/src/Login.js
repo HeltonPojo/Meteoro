@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login(){
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
+    //const navigate = useNavigate()
 
     function handelSubmit(event){
         event.preventDefault();
         axios.post('http://localhost:8081/login', {email, senha})
         .then(res => {
             console.log(res);
-            /*if (res.data.isAdmin) {
-                history.push('/admin');
+            /*
+              if (res.data.isAdmin) {
+                navigate('admin');
               } else {
-                history.push('/user');
+                navigate('membro');
               }*/
         })
         .catch(err => console.log(err));
