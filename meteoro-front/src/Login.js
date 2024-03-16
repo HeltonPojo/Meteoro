@@ -14,17 +14,17 @@ function Login(){
         .then(res => {
             console.log(res);
             if (res.data.isAdmin) {
-            navigate('admin');
+                navigate('admin');
             } else {
-            navigate('membro');
+                navigate('membro');
             }
         })
         .catch(err => console.log(err));
     }
 
     return (
-        <div className='d-flex vh-100 justify-content-center align-items-center bg-primary'>
-            <div className='p-3 bg-white w-25'>
+        <div className='d-flex vh-100 justify-content-center align-items-center bg-dark'>
+            <div className='p-3 bg-secondary w-25'>
                 <form onSubmit={handelSubmit}>
                     <div className='mb-3'>
                         <label htmlFor="email">Email</label>
@@ -37,7 +37,6 @@ function Login(){
                     <button className='btn btn-success'>Entrar</button>
                 </form>
             </div>
-
         </div>
 
     )
