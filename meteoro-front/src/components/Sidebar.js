@@ -11,18 +11,21 @@ import {
   CDBContainer,
   CDBSidebarCTA,
 } from 'cdbreact';
-
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-      <CDBSidebar textColor="#fff" backgroundColor="#333" style={{ height: '100vh' }}>
-        <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Meteoro</CDBSidebarHeader>
+      <CDBSidebar textColor="#fff" backgroundColor="#ffa500" style={{ height: '100vh' }}>
+        <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>METEORO</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
+          <Link to="/Presenca">
             <CDBSidebarMenuItem  icon="th-large" iconSize="lg" >
-              Bater Ponto
+              Ponto Eletronico
             </CDBSidebarMenuItem>
+            </Link>
+
             
           </CDBSidebarMenu>
         </CDBSidebarContent>

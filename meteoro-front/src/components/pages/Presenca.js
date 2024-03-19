@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Layout } from 'antd';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import axios from "axios";
 import Sidebar from "../Sidebar";
+import FormLogin from "../FormLogin";
 
 
 const { Header, Sider } = Layout;
@@ -47,7 +51,7 @@ function Presenca() {
     return (
         <Layout>
             <Sider>
-                <div className='d-flex vh-100 justify-content-center align-items-center bg-secondary'>
+                <div className='d-flex justify-content-center align-items-center'>
 
                     <form onSubmit={handelSubmit}>
                         <div className='mb-3'>
@@ -79,7 +83,37 @@ function Presenca() {
         </Layout>
     );}else{
         return (
-            <Sidebar/>
+            <>
+                
+                <Row>
+                    <Sidebar/>
+
+                    <Col className='d-flex justify-content-center align-items-center'>
+                        <FormLogin/>
+                    </Col>
+
+                    <Col>
+                        <div>
+                            <h1>Informações do Usuário</h1>
+                            {userData.map((user) => (
+                                <div key={user.Id}>
+                                    <h4>{user.Id}</h4>
+                                    <h4>{user.Email}</h4>
+                                    <h4>{user.Cargo}</h4>
+                                    <h4>{user.horas}</h4>
+                                    <h4>{user.Entrada}</h4>
+                                    <button onClick={handleSair} data-user-id={user.Id}> Sair </button>
+                                </div> 
+                            ))}
+                        </div>
+                    </Col>
+
+                    <Col>
+                    <h1>Horas ja feita</h1>
+                    </Col>
+                </Row>
+
+            </>
         );
     }
 }
