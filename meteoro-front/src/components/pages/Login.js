@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Formlogin from '../FormLogin';
 
 function Login(){
     const [email, setEmail] = useState('')
@@ -23,19 +24,9 @@ function Login(){
     }
 
     return (
-        <div className='d-flex vh-100 justify-content-center align-items-center bg-dark'>
-            <div className='p-3 bg-secondary w-25'>
-                <form onSubmit={handelSubmit}>
-                    <div className='mb-3'>
-                        <label htmlFor="email">Email</label>
-                        <input type="email" placeholder='Email' className='form-control' onChange={e => setEmail(e.target.value)}></input>
-                    </div>
-                    <div className='mb-3'>
-                    <label htmlFor="senha">Senha</label>
-                        <input type="password" placeholder='Senha' className='form-control' onChange={e => setSenha(e.target.value)}></input>
-                    </div>
-                    <button className='btn btn-success'>Entrar</button>
-                </form>
+        <div className='d-flex vh-100 justify-content-center align-items-center'>
+            <div className='p-3 w-25'>
+                <Formlogin/>
             </div>
         </div>
 

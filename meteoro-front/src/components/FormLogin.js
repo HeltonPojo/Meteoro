@@ -105,7 +105,7 @@ function Formlogin(){
               variant="contained"
               sx={{ mt: 3, mb: 2, paddingTop: 2, paddingBottom:2, }}
             >
-              Abrir ponto
+              Entrar
             </Button>
           </Box>
         </Box>
