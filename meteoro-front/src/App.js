@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
-import Login from './Login';
-import Usuario from './Usuario';
-import Admin from './Admin';
-import Presenca from './Presenca';
+import Login from './components/pages/Login';
+import Usuario from './components/pages/Usuario';
+import Admin from './components/pages/Admin';
+import Presenca from './components/pages/Presenca';
 
 function App(){
   return(
