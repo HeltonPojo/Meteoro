@@ -20,7 +20,7 @@ const theme = createTheme({
     palette: {
       mode: 'light',
       primary: {
-        main: '#ec8135',
+        main: '#ffa500',
       },
       secondary: {
         main: '#db562b',
@@ -68,6 +68,24 @@ const theme = createTheme({
     },
     shape: {
       borderRadius: 16,
+    },
+  });
+
+  const tutorInfoStyles = () => ({
+    title: {
+      fontFamily: family,
+      color: "#4d4b5f",
+      fontSize: titleFontSize,
+      lineHeight: 1.2,
+      fontWeight: 700,
+      marginBottom: "0.125rem",
+    },
+    subtitle: {
+      fontFamily: family,
+      color: "#696c6f",
+      fontWeight: 500,
+      fontSize: subtitleFontSize,
+      lineHeight: 1.4,
     },
   });
 
@@ -169,41 +187,31 @@ function CardPresenca() {
                 
                 key={user.Id}
                 >
-                <CardContent>
-                    <Avatar sx={{ 
-                        bgcolor: orange, 
-                        width: 60,
-                        height: 60,
-                        margin: "auto", }} aria-label="recipe">
-                                E
-                    </Avatar>
-                    <Box
-                    component="h3"
-                    sx={{
-                        fontSize: 18,
-                        fontWeight: "bold",
-                        letterSpacing: "0.5px",
-                        marginTop: 1,
-                        marginBottom: 0,
-                    }}
+                
+                <Box
+                    display="flex"
+                    p={1.5}
+                    maxWidth={350}
+                    gap={2}
+                    sx={{ alignItems: "center", marginTop:2.0,  }}
+                    key={user.Id}
                     >
-                     {user.Email} 
+                    <Box>
+                        <Avatar
+                        src={''}
+                        sx={{ borderRadius: 3, width: 48, height: 48 }}
+                        >E</Avatar>
                     </Box>
-                    <Box
-                    component="span"
-                    sx={{
-                        fontSize: 14,
-                        color: "grey.500",
-                        marginBottom: "0.875em",
-                    }}
-                    >
-                     {user.Cargo} 
-                    </Box>
-                </CardContent>
+                    <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
+                        <Typography>{user.Email}</Typography>
+                        <Typography>{user.Cargo}</Typography>
+                    </div>
+                </Box>
+
                 <Divider light />
                 <Box display={"flex"}>
                     <Box
-                    p={2}
+                    p={1}
                     flex={"auto"}
                     sx={{
                         position: "relative",
@@ -224,7 +232,7 @@ function CardPresenca() {
                     >
                     <Box
                         sx={{
-                        fontSize: 12,
+                        fontSize: 10,
                         color: "grey.500",
                         fontWeight: 500,
                         fontFamily:
@@ -237,19 +245,19 @@ function CardPresenca() {
                     <Box
                         component="p"
                         sx={{
-                        fontSize: 20,
+                        fontSize: 14,
                         fontWeight: "bold",
                         marginBottom: 0.5,
                         letterSpacing: "1px",
                         }}
                     >
-                        <Typography gutterBottom variant="h6" component="div">
+                        <Typography gutterBottom variant="h3" component="div">
                              <Relogio horas={user.horas} Entrada={user.Entrada} /> 
                         </Typography>
                     </Box>
                     </Box>
                     <Box
-                    p={2}
+                    p={1}
                     flex={"auto"}
                     sx={{
                         position: "relative",

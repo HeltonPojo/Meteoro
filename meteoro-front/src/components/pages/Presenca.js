@@ -10,6 +10,16 @@ import CardHorasFeitas from "../CardHorasFeita";
 import HeaderEncautech from "../HeaderEncautech";
 
 
+import {
+    CDBBtn,
+    CDBProgress,
+    CDBTable,
+    CDBTableHeader,
+    CDBTableBody,
+    CDBContainer,
+    CDBLink } from "cdbreact";
+
+
 function Presenca() {
     return (
         
@@ -24,15 +34,43 @@ function Presenca() {
 
                     <Row className='mx-0 px-0' >
                         <Col className='d-flex justify-content-center align-items-center'>
-                            <FormLogin />
+                            <div className="card-bg w-100 border d-flex flex-column">
+                                <div className="p-4 d-flex flex-column h-100">
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <h4 className="m-0 h5 font-weight-bold text-dark">Abra seu ponto</h4>
+                                        <div className="py-1 px-2 bg-grey rounded-circle"><i className="fas fa-suitcase"></i></div>
+                                    </div>
+                                    <FormLogin />
+                                </div>
+                            </div>
                         </Col>
 
-                        <Col className='d-flex justify-content-center'>
-                            <CardPresenca />
+                        <Col className='d-flex justify-content-center '>
+                            <div className="card-bg w-100 border d-flex flex-column">
+                                    <div className="p-4 d-flex flex-column h-100">
+                                        <div className="d-flex align-items-center justify-content-between">
+                                            <h4 className="m-0 h5 font-weight-bold text-dark">Pontos abertos</h4>
+                                            <div className="py-1 px-2 bg-grey rounded-circle"><i className="fas fa-suitcase"></i></div>
+                                        </div>
+                                        <div className='d-flex justify-content-center '>
+                                            <CardPresenca />
+                                        </div>
+                                    </div>
+                            </div>
                         </Col>
 
                         <Col>
-                            <CardHorasFeitas/>
+
+                            <div className="card-bg w-100 border d-flex flex-column p-4" style={{gridRow:"span 2"}}>
+                                <div className="d-flex">
+                                <h6  className="h5 font-weight-bold text-dark">Horas dos Membros  </h6>
+                                <div className="ml-auto rounded-circle bg-grey py-1 px-2"><i className="fas fa-user"></i></div>
+                                </div>
+                                
+                                <CardHorasFeitas/>
+                            
+                            
+                            </div>
                         </Col>
                     </Row>
                  
