@@ -34,7 +34,7 @@ function Presenca() {
 
                     <Row className='mx-0 px-0' >
                         <Col className='d-flex justify-content-center align-items-center'>
-                            <div className="card-bg w-100 border d-flex flex-column">
+                            <div className="card-bg rounded-3 w-100 border d-flex flex-column">
                                 <div className="p-4 d-flex flex-column h-100">
                                     <div className="d-flex align-items-center justify-content-between">
                                         <h4 className="m-0 h5 font-weight-bold text-dark">Abra seu ponto</h4>
@@ -46,7 +46,7 @@ function Presenca() {
                         </Col>
 
                         <Col className='d-flex justify-content-center '>
-                            <div className="card-bg w-100 border d-flex flex-column">
+                            <div className="card-bg rounded-3 w-100 border d-flex flex-column">
                                     <div className="p-4 d-flex flex-column h-100">
                                         <div className="d-flex align-items-center justify-content-between">
                                             <h4 className="m-0 h5 font-weight-bold text-dark">Pontos abertos</h4>
@@ -61,9 +61,9 @@ function Presenca() {
 
                         <Col>
 
-                            <div className="card-bg w-100 border d-flex flex-column p-4" style={{gridRow:"span 2"}}>
+                            <div className="card-bg rounded-3 w-100 border d-flex flex-column p-4" style={{gridRow:"span 2"}}>
                                 <div className="d-flex">
-                                <h6  className="h5 font-weight-bold text-dark">Horas dos Membros  </h6>
+                                <h6  className="h5 font-weight-bold text-dark">Ranking de horas </h6>
                                 <div className="ml-auto rounded-circle bg-grey py-1 px-2"><i className="fas fa-user"></i></div>
                                 </div>
                                 

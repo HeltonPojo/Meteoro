@@ -192,7 +192,7 @@ function CardPresenca() {
                     display="flex"
                     p={1.5}
                     maxWidth={350}
-                    gap={2}
+                    gap={1}
                     sx={{ alignItems: "center", marginTop:2.0,  }}
                     key={user.Id}
                     >
