@@ -6,25 +6,38 @@ import Col from 'react-bootstrap/Col';
 import Sidebar from "../Sidebar";
 import FormLogin from "../FormLogin";
 import CardPresenca from "../CardPresenca";
+import HeaderEncautech from "../HeaderEncautech";
 
 
 function Presenca() {
     return (
         <>
             <Row>
-                <Sidebar />
 
-                <Col className='d-flex justify-content-center align-items-center'>
-                    <FormLogin />
+                <Col md="auto">
+                    <Sidebar />
                 </Col>
 
                 <Col>
-                    <CardPresenca />
+                    <HeaderEncautech/>
+
+                    <Row className='d-flex justify-content-center align-items-center'>
+
+                        <Col >
+                            <FormLogin />
+                        </Col>
+
+                        <Col >
+                            <CardPresenca />
+                        </Col>
+
+                        <Col>
+                            <h1>Horas ja feita</h1>
+                        </Col>
+                    </Row>
+                 
                 </Col>
 
-                <Col>
-                    <h1>Horas ja feita</h1>
-                </Col>
             </Row>
 
         </>
