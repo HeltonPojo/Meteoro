@@ -1,10 +1,10 @@
-import React from "react";
-import Add from "@mui/icons-material/Add";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import { Typography } from "@mui/material";
+import axios from "axios";
 
 
 const titleFontSize = "1rem";
@@ -40,7 +40,25 @@ const StyledIconButton = styled(IconButton)(() => ({
 }));
 
 function CardHorasFeita() {
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+}, []);
+
+const fetchData = async () => {
+  try {
+      const response = await axios.get('http://localhost:8081/ranking-membros');
+      setUserData(response.data);
+  } catch (error) {
+      console.error('Erro ao buscar dados da API:', error);
+  }
+};
+
+
   return (
+    <>
+    {userData.map((user) => ( 
     <Box
       display="flex"
       p={1.5}
@@ -49,25 +67,22 @@ function CardHorasFeita() {
       bgcolor={"#f5f5f5"}
       borderRadius={4}
       sx={{ alignItems: "center" }}
+      key={user.Id}
     >
       <Box>
         <Avatar
-          src={
-            "https://www.biography.com/.image/t_share/MTU0ODUwMjQ0NjIwNzI0MDAx/chris-hemsworth-poses-during-a-photo-call-for-thor-ragnarok-on-october-15-2017-in-sydney-australia-photo-by-mark-metcalfe_getty-images-for-disney-square.jpg"
-          }
+          src={''}
           sx={{ borderRadius: 3, width: 48, height: 48 }}
-        />
+        >E</Avatar>
       </Box>
       <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
-        <Typography>Nomeeeeeeeeeeeeeeee</Typography>
-        <Typography>sobreaaaaaaaaaaaaaa</Typography>
+        <Typography>{user.Email}</Typography>
+        <Typography>{user.Cargo}</Typography>
+        <h7>Horas Cumpridas: {user.horas}</h7>
       </div>
-      <Box ml={1}>
-        <StyledIconButton size="small">
-          <Add />
-        </StyledIconButton>
-      </Box>
     </Box>
+             ))} 
+  </>
   );
 }
 

@@ -31,7 +31,7 @@ function Presenca() {
                             <CardPresenca />
                         </Col>
 
-                        <Col >
+                        <Col>
                             <CardHorasFeitas/>
                         </Col>
                     </Row>
