@@ -59,12 +59,16 @@ function CardPresenca() {
 
 
     function handleSair(event) {
+        //if(latitude === -21.533 && longitude === -42.635){
         event.preventDefault();
         const Id = event.currentTarget.dataset.userId;
         axios.post('http://localhost:8081/marcar-saida', { Id }).then(res => {
             location.reload();
         })
             .catch(err => console.log(err));
+        //}else{
+        //  alert('É necessario estar na sede')
+        //}
     }
 
     return (
