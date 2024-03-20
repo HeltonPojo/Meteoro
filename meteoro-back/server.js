@@ -135,7 +135,7 @@ app.get('/membros-presentes', (req, res) => {
             //console.log("Presentes: ", data);
             return res.json(data);
         } else {
-            return res.json("")
+            return res.json(data)
         }
     });
 });
