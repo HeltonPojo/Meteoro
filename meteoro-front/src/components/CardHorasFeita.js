@@ -4,6 +4,8 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
+import { Typography } from "@mui/material";
+
 
 const titleFontSize = "1rem";
 const subtitleFontSize = "0.75rem";
@@ -37,11 +39,12 @@ const StyledIconButton = styled(IconButton)(() => ({
   },
 }));
 
-function CardHorasFeitas() {
+function CardHorasFeita() {
   return (
     <Box
       display="flex"
       p={1.5}
+      maxWidth={350}
       gap={2}
       bgcolor={"#f5f5f5"}
       borderRadius={4}
@@ -55,7 +58,10 @@ function CardHorasFeitas() {
           sx={{ borderRadius: 3, width: 48, height: 48 }}
         />
       </Box>
-      
+      <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
+        <Typography>Nomeeeeeeeeeeeeeeee</Typography>
+        <Typography>sobreaaaaaaaaaaaaaa</Typography>
+      </div>
       <Box ml={1}>
         <StyledIconButton size="small">
           <Add />
@@ -65,4 +71,4 @@ function CardHorasFeitas() {
   );
 }
 
-export default CardHorasFeitas;
+export default CardHorasFeita;
