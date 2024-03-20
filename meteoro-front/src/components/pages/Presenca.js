@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Sidebar from "../Sidebar";
 import FormLogin from "../FormLogin";
 import CardPresenca from "../CardPresenca";
+import CardHorasFeitas from "../CardHorasFeita";
 import HeaderEncautech from "../HeaderEncautech";
 
 
@@ -31,7 +32,7 @@ function Presenca() {
                         </Col>
 
                         <Col className='d-flex justify-content-center'>
-                            <h1>Horas ja feita</h1>
+                            <CardHorasFeitas/>
                         </Col>
                     </Row>
                  

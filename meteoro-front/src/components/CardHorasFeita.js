@@ -4,7 +4,6 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
-import { Info, InfoSubtitle, InfoTitle } from "../info-basic";
 
 const titleFontSize = "1rem";
 const subtitleFontSize = "0.75rem";
@@ -38,7 +37,7 @@ const StyledIconButton = styled(IconButton)(() => ({
   },
 }));
 
-export function CardTutor() {
+function CardHorasFeitas() {
   return (
     <Box
       display="flex"
@@ -56,10 +55,7 @@ export function CardTutor() {
           sx={{ borderRadius: 3, width: 48, height: 48 }}
         />
       </Box>
-      <Info sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
-        <InfoTitle>Kenny Foster</InfoTitle>
-        <InfoSubtitle>@fosterlive</InfoSubtitle>
-      </Info>
+      
       <Box ml={1}>
         <StyledIconButton size="small">
           <Add />
@@ -68,3 +64,5 @@ export function CardTutor() {
     </Box>
   );
 }
+
+export default CardHorasFeitas;

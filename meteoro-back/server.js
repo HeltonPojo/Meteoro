@@ -140,6 +140,18 @@ app.get('/membros-presentes', (req, res) => {
     });
 });
 
+app.get('/ranking-membros', (req, res) => {
+    const sql = "SELECT Id, Email, Cargo, horas FROM Usuario ORDER BY horas DESC;";
+    db.query(sql, (err, data) => {
+        if (err) return res.json("Erro no Consulta Ranking dos  Membros: ", err);
+        if (data.length > 0) {
+            return res.json(data);
+        } else {
+            return res.json(data)
+        }
+    });
+});
+
 app.listen(8081, () => {
     console.log("Ouvindo papai...")
 })
