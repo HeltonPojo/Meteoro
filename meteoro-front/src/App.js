@@ -9,10 +9,10 @@ import Presenca from './components/pages/Presenca';
 function App(){
   return(
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/membro" element={<Usuario />} />
       <Route path="/admin" element={<Admin />} />
-      <Route path="/presenca" element={<Presenca />} />
+      <Route path="/" element={<Presenca />} />
     </Routes>
   )
 }

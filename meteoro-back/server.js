@@ -17,8 +17,10 @@ const db = mysql.createConnection({
 })
 
 app.post('/login', (req, res) => {
+    const { email, senha } = req.body;
+    email = email.toLowerCase();
     const sql = "SELECT Id, Email, Senha FROM Usuario WHERE Email = ? AND Senha = ? AND esta_na_sede = 1";
-    db.query(sql, [req.body.email, req.body.senha], (err, data) => {
+    db.query(sql, [email, senha], (err, data) => {
         if (err) return res.json("Erro no Login: ", err);
         if (data.length > 0) {
             return res.json("Login Efetuado")

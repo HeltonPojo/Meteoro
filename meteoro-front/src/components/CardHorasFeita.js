@@ -44,46 +44,48 @@ function CardHorasFeita() {
 
   useEffect(() => {
     fetchData();
-}, []);
+  }, []);
 
-const fetchData = async () => {
-  try {
+  const fetchData = async () => {
+    try {
       const response = await axios.get('http://localhost:8081/ranking-membros');
       setUserData(response.data);
-  } catch (error) {
+    } catch (error) {
       console.error('Erro ao buscar dados da API:', error);
-  }
-};
+    }
+  };
 
 
   return (
     <>
-    {userData.map((user) => ( 
-    <Box
-      display="flex"
-      p={1.5}
-      maxWidth={350}
-      gap={2}
-      bgcolor={"#f5f5f5"}
-      borderRadius={4}
-      sx={{ alignItems: "center", marginTop:2.0, boxShadow:
-      "0 2px 4px -2px rgba(0,0,0,0.24), 0 4px 24px -2px rgba(0, 0, 0, 0.2)", }}
-      key={user.Id}
-    >
-      <Box>
-        <Avatar
-          src={''}
-          sx={{ borderRadius: 3, width: 48, height: 48 }}
-        >E</Avatar>
-      </Box>
-      <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
-        <Typography>{user.Email}</Typography>
-        <Typography>{user.Cargo}</Typography>
-        <h7>Horas Cumpridas: {user.horas}</h7>
-      </div>
-    </Box>
-             ))} 
-  </>
+      {userData.map((user) => (
+        <Box
+          display="flex"
+          p={1.5}
+          maxWidth={350}
+          gap={2}
+          bgcolor={"#f5f5f5"}
+          borderRadius={4}
+          sx={{
+            alignItems: "center", marginTop: 2.0, boxShadow:
+              "0 2px 4px -2px rgba(0,0,0,0.24), 0 4px 24px -2px rgba(0, 0, 0, 0.2)",
+          }}
+          key={user.Id}
+        >
+          <Box>
+            <Avatar
+              src={''}
+              sx={{ borderRadius: 3, width: 48, height: 48 }}
+            >E</Avatar>
+          </Box>
+          <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
+            <Typography>{user.Email}</Typography>
+            <Typography>{user.Cargo}</Typography>
+            <h7>Horas Cumpridas: {user.horas}</h7>
+          </div>
+        </Box>
+      ))}
+    </>
   );
 }
 
