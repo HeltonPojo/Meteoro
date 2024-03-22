@@ -93,16 +93,16 @@ function Formlogin() {
   }, []);
 
   function handelEntrar(event) {
-    //if(latitude === -21.533 && longitude === -42.635){
+    if(latitude === -21.533 && longitude === -42.635){
     event.preventDefault();
-    axios.post('http://localhost:8081/marcar-presenca', { email, senha })
+    axios.post('http://15.228.155.72:8081/marcar-presenca', { email, senha })
       .then(res => {
         location.reload();
       })
       .catch(err => console.log(err));
-    //}else{
-    //  alert('É necessario estar na sede')
-    //}
+    }else{
+      alert('É necessario estar na sede')
+    }
   }
 
   return (

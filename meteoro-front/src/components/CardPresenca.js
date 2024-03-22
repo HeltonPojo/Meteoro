@@ -126,7 +126,7 @@ function CardPresenca() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/membros-presentes');
+      const response = await axios.get('http://15.228.155.72:8081/membros-presentes');
       setUserData(response.data);
     } catch (error) {
       console.error('Erro ao buscar dados da API:', error);
@@ -138,7 +138,7 @@ function CardPresenca() {
     //if(latitude === -21.533 && longitude === -42.635){
     event.preventDefault();
     const Id = event.currentTarget.dataset.userId;
-    axios.post('http://localhost:8081/marcar-saida', { Id }).then(res => {
+    axios.post('http://15.228.155.72:8081/marcar-saida', { Id }).then(res => {
       location.reload();
     })
       .catch(err => console.log(err));
