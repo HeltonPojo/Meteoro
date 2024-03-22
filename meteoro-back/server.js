@@ -153,5 +153,5 @@ app.get('/ranking-membros', (req, res) => {
 });
 
 app.listen(8081, () => {
-    console.log("Ouvindo papai...")
+    console.log("Ouvindo papai...");
 })
