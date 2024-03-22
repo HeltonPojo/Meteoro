@@ -35,7 +35,8 @@ function Presenca() {
                     <HeaderEncautech />
 
                     <Row className='mx-0 px-0' >
-                        <Col className='d-flex justify-content-center align-items-center'>
+
+                        <Col className='d-flex justify-content-center align-items-start'>
                             <div className="card-bg rounded-3 w-100 border d-flex flex-column">
                                 <div className="p-4 d-flex flex-column h-100">
                                     <div className="d-flex align-items-center justify-content-between">
@@ -47,8 +48,8 @@ function Presenca() {
                             </div>
                         </Col>
 
-                        <Col className='d-flex justify-content-center '>
-                            <div className="card-bg rounded-3 w-100 border d-flex flex-column">
+                        <Col className='d-flex justify-content-center align-items-start '>
+                            <div className="overflow-scroll card-bg rounded-3 w-100 border d-flex flex-column" style={{ height: '86vh' }}>
                                 <div className="p-4 d-flex flex-column h-100">
                                     <div className="d-flex align-items-center justify-content-between">
                                         <h4 className="m-0 h5 font-weight-bold text-dark">Pontos abertos</h4>
@@ -59,17 +60,15 @@ function Presenca() {
                             </div>
                         </Col>
 
-                        <Col>
-
-                            <div className="card-bg rounded-3 w-100 border d-flex flex-column p-4" style={{ gridRow: "span 2" }}>
-                                <div className="d-flex">
-                                    <h6 className="h5 font-weight-bold text-dark">Ranking de horas </h6>
-                                    <div className="ml-auto rounded-circle bg-grey py-1 px-2"><i className="fas fa-user"></i></div>
+                        <Col className='d-flex justify-content-center align-items-start '>
+                            <div className="overflow-scroll card-bg rounded-3 w-100 border d-flex flex-column" style={{ height: '86vh' }}>
+                                <div className="p-4 d-flex flex-column h-100">
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <h6 className="m-0 h5 font-weight-bold text-dark">Ranking de horas </h6>
+                                        <div className=" rounded-circle bg-grey py-1 px-2"><i className="fas fa-user"></i></div>
+                                    </div>
                                 </div>
-
                                 <CardHorasFeitas />
-
-
                             </div>
                         </Col>
                     </Row>

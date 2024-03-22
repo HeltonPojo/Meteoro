@@ -5,6 +5,10 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+
 import axios from "axios";
 
 
@@ -63,10 +67,24 @@ const theme = createTheme({
   },
 });
 
+// Componente funcional que renderiza o alerta
+const AlertMessage = ({ open, severity, content, handleClose }) => (
+  <Collapse in={open}>
+    <Alert severity={severity} onClose={handleClose}>
+      {content}
+    </Alert>
+  </Collapse>
+);
+
+
 
 function Formlogin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState('success'); // Padrão: sucesso
+  const [alertContent, setAlertContent] = useState('');
+
 
   //const [latitude, setLatitude] = useState(null);
   //const [longitude, setLongitude] = useState(null);
@@ -92,12 +110,31 @@ function Formlogin() {
   //  getLocation();
   //}, []);
 
+  const handleCloseAlert = () => {
+    setAlertOpen(false);
+  };
+
   function handelEntrar(event) {
     //if(latitude === -21.533 && longitude === -42.635){
     event.preventDefault();
     axios.post('http://15.228.155.72:8081/marcar-presenca', { email, senha })
       .then(res => {
         location.reload();
+        
+          var res = res.data;
+          // Verifica se a resposta do servidor é "Informações incorretas"
+          if (res === "Informações incorretas") {
+
+            alert("As informações fornecidas estão incorretas. Este usuário já está logado");
+            // setAlertContent("As informações fornecidas estão incorretas. Este usuário já está logado");
+            // setAlertSeverity('error');
+            // setAlertOpen(true);
+          } else {
+            alert("Login com sucesso");
+            // setAlertContent("Login com sucesso");
+            // setAlertSeverity('success');
+            // setAlertOpen(true);
+          }
       })
       .catch(err => console.log(err));
     //}else{
@@ -106,6 +143,13 @@ function Formlogin() {
   }
 
   return (
+    <>
+    <AlertMessage
+        open={alertOpen}
+        severity={alertSeverity}
+        content={alertContent}
+        handleClose={handleCloseAlert}
+      /> 
     <Container component="main" maxWidth="xs">
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -117,6 +161,7 @@ function Formlogin() {
             alignItems: 'center',
           }}
         >
+
 
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
@@ -157,6 +202,7 @@ function Formlogin() {
         </Box>
       </ThemeProvider>
     </Container>
+    </>
   );
 }
 
