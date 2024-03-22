@@ -1,9 +1,10 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 //opt/lampp/lampp/manager-linux-x64.run
 //systemctl status mysql
 
