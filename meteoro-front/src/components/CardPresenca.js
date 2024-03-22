@@ -100,27 +100,27 @@ function CardPresenca() {
   */
   const [userData, setUserData] = useState([]);
 
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [error, setError] = useState(null);
+  //const [latitude, setLatitude] = useState(null);
+  //const [longitude, setLongitude] = useState(null);
+  //const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            setLatitude(position.coords.latitude.toFixed(3));
-            setLongitude(position.coords.longitude.toFixed(3));
-          },
-          error => {
-            setError(error.message);
-          }
-        );
-      } else {
-        setError('Geolocation is not supported by this browser.');
-      }
-    };
-    getLocation();
+    //const getLocation = () => {
+    //  if (navigator.geolocation) {
+    //    navigator.geolocation.getCurrentPosition(
+    //      position => {
+    //        setLatitude(position.coords.latitude.toFixed(3));
+    //        setLongitude(position.coords.longitude.toFixed(3));
+    //      },
+    //      error => {
+    //        setError(error.message);
+    //      }
+    //    );
+    //  } else {
+    //    setError('Geolocation is not supported by this browser.');
+    //  }
+    //};
+    //getLocation();
     fetchData();
   }, []);
 
@@ -135,16 +135,16 @@ function CardPresenca() {
 
 
   function handleSair(event) {
-    if(latitude === -21.533 && longitude === -42.635){
+    //if(latitude === -21.533 && longitude === -42.635){
     event.preventDefault();
     const Id = event.currentTarget.dataset.userId;
     axios.post('http://15.228.155.72:8081/marcar-saida', { Id }).then(res => {
       location.reload();
     })
       .catch(err => console.log(err));
-    }else{
-      alert('É necessario estar na sede')
-    }
+    //}else{
+    //  alert('É necessario estar na sede')
+    //}
   }
 
   return (

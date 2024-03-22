@@ -68,41 +68,41 @@ function Formlogin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            setLatitude(position.coords.latitude.toFixed(3));
-            setLongitude(position.coords.longitude.toFixed(3));
-          },
-          error => {
-            setError(error.message);
-          }
-        );
-      } else {
-        setError('Geolocation is not supported by this browser.');
-      }
-    };
-
-    getLocation();
-  }, []);
+  //const [latitude, setLatitude] = useState(null);
+  //const [longitude, setLongitude] = useState(null);
+  //const [error, setError] = useState(null);
+//
+//  //useEffect(() => {
+//  //  const getLocation = () => {
+//  //    if (navigator.geolocation) {
+  //      navigator.geolocation.getCurrentPosition(
+  //        position => {
+  //          setLatitude(position.coords.latitude.toFixed(3));
+  //          setLongitude(position.coords.longitude.toFixed(3));
+  //        },
+  //        error => {
+  //          setError(error.message);
+  //        }
+  //      );
+  //    } else {
+  //      setError('Geolocation is not supported by this browser.');
+  //    }
+  //  };
+//
+  //  getLocation();
+  //}, []);
 
   function handelEntrar(event) {
-    if(latitude === -21.533 && longitude === -42.635){
+    //if(latitude === -21.533 && longitude === -42.635){
     event.preventDefault();
     axios.post('http://15.228.155.72:8081/marcar-presenca', { email, senha })
       .then(res => {
         location.reload();
       })
       .catch(err => console.log(err));
-    }else{
-      alert('É necessario estar na sede')
-    }
+    //}else{
+    //  alert('É necessario estar na sede')
+    //}
   }
 
   return (
