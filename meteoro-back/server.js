@@ -8,9 +8,9 @@ app.use(express.json());
 //systemctl status mysql
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "",
+    host: "database.croi64eak66x.sa-east-1.rds.amazonaws.com",
+    user: "admin",
+    password: "ENcAUT3CH32024",
     database: "meteoro"
 })
 
