@@ -48,7 +48,7 @@ function CardHorasFeita() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/ranking-membros');
+      const response = await axios.get('http://15.228.155.72:8081/ranking-membros');
       setUserData(response.data);
     } catch (error) {
       console.error('Erro ao buscar dados da API:', error);
