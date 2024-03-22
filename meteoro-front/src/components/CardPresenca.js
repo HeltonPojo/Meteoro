@@ -181,7 +181,7 @@ function CardPresenca() {
                 >E</Avatar>
               </Box>
               <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
-                <Typography>{user.Email}</Typography>
+                <Typography>{user.Nome}</Typography>
                 <Typography>{user.Cargo}</Typography>
               </div>
             </Box>

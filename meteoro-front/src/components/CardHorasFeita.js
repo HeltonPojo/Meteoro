@@ -79,7 +79,7 @@ function CardHorasFeita() {
             >E</Avatar>
           </Box>
           <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
-            <Typography>{user.Email}</Typography>
+            <Typography>{user.Nome}</Typography>
             <Typography>{user.Cargo}</Typography>
             <h7>Horas Cumpridas: {user.horas}</h7>
           </div>

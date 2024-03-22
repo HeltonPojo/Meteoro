@@ -1,10 +1,8 @@
 const express = require('express');
 const mysql = require('mysql');
-const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
 //opt/lampp/lampp/manager-linux-x64.run
 //systemctl status mysql
@@ -130,7 +128,7 @@ app.post('/marcar-saida', (req, res) => {
 
 app.get('/membros-presentes', (req, res) => {
 //adicionar nome no Banco de dados
-    const sql = "SELECT Usuario.Id as Id, Email, Cargo, horas, Entrada FROM Usuario INNER JOIN Horarios on Usuario.Id=Horarios.IdUsuario WHERE esta_na_sede = 1 AND isnull(Horarios.Saida)";
+    const sql = "SELECT Usuario.Id as Id, Nome,Email, Cargo, horas, Entrada FROM Usuario INNER JOIN Horarios on Usuario.Id=Horarios.IdUsuario WHERE esta_na_sede = 1 AND isnull(Horarios.Saida)";
     db.query(sql, (err, data) => {
         if (err) return res.json("Erro no Consulta Membros Presentes: ", err);
         if (data.length > 0) {
@@ -143,7 +141,7 @@ app.get('/membros-presentes', (req, res) => {
 });
 
 app.get('/ranking-membros', (req, res) => {
-    const sql = "SELECT Id, Email, Cargo, horas FROM Usuario ORDER BY horas DESC;";
+    const sql = "SELECT Id, Nome,Email, Cargo, horas FROM Usuario ORDER BY horas DESC;";
     db.query(sql, (err, data) => {
         if (err) return res.json("Erro no Consulta Ranking dos  Membros: ", err);
         if (data.length > 0) {
