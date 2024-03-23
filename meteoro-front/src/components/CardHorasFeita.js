@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import { Typography } from "@mui/material";
-import axios from "axios";
 
 
 const titleFontSize = "1rem";
@@ -39,26 +38,10 @@ const StyledIconButton = styled(IconButton)(() => ({
   },
 }));
 
-function CardHorasFeita() {
-  const [userData, setUserData] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://15.228.155.72:8081/ranking-membros');
-      setUserData(response.data);
-    } catch (error) {
-      console.error('Erro ao buscar dados da API:', error);
-    }
-  };
-
-
+function CardHorasFeita({ userankData }) {
   return (
     <>
-      {userData.map((user) => (
+      {userankData.map((user) => (
         <Box
           display="flex"
           p={1.5}
@@ -67,7 +50,7 @@ function CardHorasFeita() {
           bgcolor={"#f5f5f5"}
           borderRadius={4}
           sx={{
-            alignItems: "center", marginY: 1.0,marginX:2.0, boxShadow:
+            alignItems: "center", marginY: 1.0, marginX: 2.0, boxShadow:
               "0 2px 4px -2px rgba(0,0,0,0.24), 0 4px 24px -2px rgba(0, 0, 0, 0.2)",
           }}
           key={user.Id}
@@ -78,11 +61,11 @@ function CardHorasFeita() {
               sx={{ borderRadius: 3, width: 48, height: 48 }}
             >E</Avatar>
           </Box>
-          <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
+          <Box sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
             <Typography>{user.Nome}</Typography>
             <Typography>{user.Cargo}</Typography>
-            <h7>Horas Cumpridas: {user.horas}</h7>
-          </div>
+            <>Horas Cumpridas: {user.horas}</>
+          </Box>
         </Box>
       ))}
     </>

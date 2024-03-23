@@ -129,7 +129,7 @@ app.post('/marcar-saida', (req, res) => {
 
 app.get('/membros-presentes', (req, res) => {
 //adicionar nome no Banco de dados
-    const sql = "SELECT Usuario.Id as Id, Nome,Email, Cargo, horas, Entrada FROM Usuario INNER JOIN Horarios on Usuario.Id=Horarios.IdUsuario WHERE esta_na_sede = 1 AND isnull(Horarios.Saida)";
+    const sql = "SELECT Usuario.Id as Id, Nome, Email, Cargo, horas, Entrada FROM Usuario INNER JOIN Horarios on Usuario.Id=Horarios.IdUsuario WHERE esta_na_sede = 1 AND isnull(Horarios.Saida)";
     db.query(sql, (err, data) => {
         if (err) return res.json("Erro no Consulta Membros Presentes: ", err);
         if (data.length > 0) {

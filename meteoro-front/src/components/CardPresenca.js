@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import axios from "axios";
 import { orange } from '@mui/material/colors';
 
 import Relogio from "./Relogio";
@@ -89,62 +88,11 @@ const tutorInfoStyles = () => ({
   },
 });
 
-function CardPresenca() {
-  /* PARA QUANDO TIVERMOS FOTOS DOS MEMBROS
-    <CardMedia
-      component="img"
-      alt="green iguana"
-      height="140"
-      image="/"
-    />
-  */
-  const [userData, setUserData] = useState([]);
-
-  //const [latitude, setLatitude] = useState(null);
-  //const [longitude, setLongitude] = useState(null);
-  //const [error, setError] = useState(null);
-
-  useEffect(() => {
-    //const getLocation = () => {
-    //  if (navigator.geolocation) {
-    //    navigator.geolocation.getCurrentPosition(
-    //      position => {
-    //        setLatitude(position.coords.latitude.toFixed(3));
-    //        setLongitude(position.coords.longitude.toFixed(3));
-    //      },
-    //      error => {
-    //        setError(error.message);
-    //      }
-    //    );
-    //  } else {
-    //    setError('Geolocation is not supported by this browser.');
-    //  }
-    //};
-    //getLocation();
-    fetchData();
-  }, [userData]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://15.228.155.72:8081/membros-presentes');
-      setUserData(response.data);
-    } catch (error) {
-      console.error('Erro ao buscar dados da API:', error);
-    }
-  };
-
-
+function CardPresenca({ userData, subUserData }) {
   function handleSair(event) {
-    //if(latitude === -21.533 && longitude === -42.635){
     event.preventDefault();
     const Id = event.currentTarget.dataset.userId;
-    axios.post('http://15.228.155.72:8081/marcar-saida', { Id }).then(res => {
-      setUserData(userData.filter(user => user.Id !== Id));
-    })
-      .catch(err => console.log(err));
-    //}else{
-    //  alert('É necessario estar na sede')
-    //}
+    subUserData(Id);
   }
 
   return (

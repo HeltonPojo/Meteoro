@@ -9,22 +9,110 @@ import CardPresenca from "../CardPresenca";
 import CardHorasFeitas from "../CardHorasFeita";
 import HeaderEncautech from "../HeaderEncautech";
 import FooterEncautech from "../FooterEncautech";
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
 
+import axios from "axios";
 
-import {
-    CDBBtn,
-    CDBProgress,
-    CDBTable,
-    CDBTableHeader,
-    CDBTableBody,
-    CDBContainer,
-    CDBLink
-} from "cdbreact";
-
+// Componente funcional que renderiza o alerta
+const AlertMessage = ({ open, severity, content, handleClose }) => (
+    <Collapse in={open}>
+        <Alert severity={severity} onClose={handleClose}>
+            {content}
+        </Alert>
+    </Collapse>
+);
 
 function Presenca() {
-    return (
+    //const [latitude, setLatitude] = useState(null);
+    //const [longitude, setLongitude] = useState(null);
+    //const [error, setError] = useState(null);
+    const [userData, setUserData] = useState([]);
+    const [loguserData, setLogUserData] = useState([]);
+    const [userankData, setUserankData] = useState([]);
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertSeverity, setAlertSeverity] = useState('success'); // Padrão: sucesso
+    const [alertContent, setAlertContent] = useState('');
 
+    useEffect(() => {
+        //const getLocation = () => {
+        //  if (navigator.geolocation) {
+        //    navigator.geolocation.getCurrentPosition(
+        //      position => {
+        //        setLatitude(position.coords.latitude.toFixed(3));
+        //        setLongitude(position.coords.longitude.toFixed(3));
+        //      },
+        //      error => {
+        //        setError(error.message);
+        //      }
+        //    );
+        //  } else {
+        //    setError('Geolocation is not supported by this browser.');
+        //  }
+        //};
+        //getLocation();
+        fetchData();
+        fetchAttData();
+    }, [userData, loguserData]);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://15.228.155.72:8081/membros-presentes');
+            setUserData(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar dados da API:', error);
+        }
+    };
+
+    const fetchAttData = async () => {
+        try {
+            const response = await axios.get('http://15.228.155.72:8081/ranking-membros');
+            setUserankData(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar dados da API:', error);
+        }
+    };
+
+    const handleCloseAlert = () => {
+        setAlertOpen(false);
+    };
+
+    const addUserData = (email, senha) => {
+        //if(latitude === -21.533 && longitude === -42.635){
+        axios.post('http://15.228.155.72:8081/marcar-presenca', { email, senha })
+            .then(res => {
+                const newUser = res.data; // ou qualquer outra resposta da sua API que contenha os dados do usuário que entrou
+                // Verifica se a resposta do servidor é "Informações incorretas"
+                if (res.data === "Informações incorretas") {
+                    setAlertContent("As informações fornecidas estão incorretas. Este usuário já está logado");
+                    setAlertSeverity('error');
+                    setAlertOpen(true);
+                } else {
+                    setAlertOpen(true);
+                    setAlertContent("Login com sucesso");
+                    setAlertSeverity('success');
+                    setLogUserData(newUser);
+                }
+            })
+            .catch(err => console.log(err));
+        //}else{
+        //  alert('É necessario estar na sede')
+        //}
+
+    };
+
+    const subUserData = (Id) => {
+        //if(latitude === -21.533 && longitude === -42.635){
+        axios.post('http://15.228.155.72:8081/marcar-saida', { Id }).then(res => {
+            setUserData(userData.filter(user => user.Id !== Id));
+        })
+            .catch(err => console.log(err));
+        //}else{
+        //  alert('É necessario estar na sede')
+        //}
+    };
+
+    return (
         <Container fluid className='mx-0 px-0'>
             <Row className=' mx-0 px-0'>
                 <Col className=' mx-0 px-0' md="auto">
@@ -33,6 +121,12 @@ function Presenca() {
 
                 <Col>
                     <HeaderEncautech />
+                    <AlertMessage
+                        open={alertOpen}
+                        severity={alertSeverity}
+                        content={alertContent}
+                        handleClose={handleCloseAlert}
+                    />
 
                     <Row className='mx-0 px-0' >
 
@@ -43,7 +137,7 @@ function Presenca() {
                                         <h4 className="m-0 h5 font-weight-bold text-dark">Abra seu ponto</h4>
                                         <div className="py-1 px-2 bg-grey rounded-circle"><i className="fas fa-suitcase"></i></div>
                                     </div>
-                                    <FormLogin />
+                                    <FormLogin addUserData={addUserData} />
                                 </div>
                             </div>
                         </Col>
@@ -55,7 +149,7 @@ function Presenca() {
                                         <h4 className="m-0 h5 font-weight-bold text-dark">Pontos abertos</h4>
                                         <div className="py-1 px-2 bg-grey rounded-circle"><i className="fas fa-suitcase"></i></div>
                                     </div>
-                                    <CardPresenca />
+                                    <CardPresenca userData={userData} subUserData={subUserData} />
                                 </div>
                             </div>
                         </Col>
@@ -68,11 +162,11 @@ function Presenca() {
                                         <div className=" rounded-circle bg-grey py-1 px-2"><i className="fas fa-user"></i></div>
                                     </div>
                                 </div>
-                                <CardHorasFeitas />
+                                <CardHorasFeitas userankData={userankData} />
                             </div>
                         </Col>
                     </Row>
-                    
+
                 </Col>
 
             </Row>
