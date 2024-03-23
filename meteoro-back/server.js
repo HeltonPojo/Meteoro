@@ -1,4 +1,4 @@
-    const express = require('express');
+const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 
@@ -38,7 +38,7 @@ app.post('/marcar-presenca', (req, res) => {
     const sqlUpdatePresente = "UPDATE Usuario SET esta_na_sede = 1 WHERE Id = ?";
 
     // Consulta para verificar se o usuário existe
-    const sqlSelectUser = "SELECT Id, esta_na_sede, horas FROM Usuario WHERE Email = ? AND Senha = ?";
+    const sqlSelectUser = "SELECT Id, Nome, Email, Cargo, horas, esta_na_sede FROM Usuario WHERE Email = ? AND Senha = ?";
 
     // Executa a consulta para verificar o usuário
     db.query(sqlSelectUser, [email, senha], (err, data) => {
@@ -133,7 +133,6 @@ app.get('/membros-presentes', (req, res) => {
     db.query(sql, (err, data) => {
         if (err) return res.json("Erro no Consulta Membros Presentes: ", err);
         if (data.length > 0) {
-            //console.log("Presentes: ", data);
             return res.json(data);
         } else {
             return res.json(data)
@@ -142,7 +141,7 @@ app.get('/membros-presentes', (req, res) => {
 });
 
 app.get('/ranking-membros', (req, res) => {
-    const sql = "SELECT Id, Nome,Email, Cargo, horas FROM Usuario ORDER BY horas DESC;";
+    const sql = "SELECT Id, Nome, Email, Cargo, horas FROM Usuario ORDER BY horas DESC;";
     db.query(sql, (err, data) => {
         if (err) return res.json("Erro no Consulta Ranking dos  Membros: ", err);
         if (data.length > 0) {

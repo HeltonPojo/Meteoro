@@ -20,7 +20,7 @@ const Sidebar = () => {
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>METEORO</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
-          <Link to="/Presenca">
+          <Link to="/">
             <CDBSidebarMenuItem  icon="th-large" iconSize="lg" >
               Ponto Eletronico
             </CDBSidebarMenuItem>

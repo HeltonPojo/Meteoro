@@ -120,21 +120,22 @@ function Formlogin() {
     axios.post('http://15.228.155.72:8081/marcar-presenca', { email, senha })
       .then(res => {
         location.reload();
+        //const newUser = res.data; // ou qualquer outra resposta da sua API que contenha os dados do usuário que entrou
+        //setUserData([...userData, newUser]);
         
-          var res = res.data;
-          // Verifica se a resposta do servidor é "Informações incorretas"
-          if (res === "Informações incorretas") {
+        // Verifica se a resposta do servidor é "Informações incorretas"
+        if (res.data === "Informações incorretas") {
 
-            alert("As informações fornecidas estão incorretas. Este usuário já está logado");
-            // setAlertContent("As informações fornecidas estão incorretas. Este usuário já está logado");
-            // setAlertSeverity('error');
-            // setAlertOpen(true);
-          } else {
-            alert("Login com sucesso");
-            // setAlertContent("Login com sucesso");
-            // setAlertSeverity('success');
-            // setAlertOpen(true);
-          }
+          //alert("As informações fornecidas estão incorretas. Este usuário já está logado");
+          setAlertContent("As informações fornecidas estão incorretas. Este usuário já está logado");
+          setAlertSeverity('error');
+          setAlertOpen(true);
+        } else {
+          //alert("Login com sucesso");
+          setAlertOpen(true);
+          setAlertContent("Login com sucesso");
+          setAlertSeverity('success');
+        }
       })
       .catch(err => console.log(err));
     //}else{

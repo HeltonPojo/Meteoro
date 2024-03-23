@@ -122,7 +122,7 @@ function CardPresenca() {
     //};
     //getLocation();
     fetchData();
-  }, []);
+  }, [userData]);
 
   const fetchData = async () => {
     try {
@@ -139,7 +139,7 @@ function CardPresenca() {
     event.preventDefault();
     const Id = event.currentTarget.dataset.userId;
     axios.post('http://15.228.155.72:8081/marcar-saida', { Id }).then(res => {
-      location.reload();
+      setUserData(userData.filter(user => user.Id !== Id));
     })
       .catch(err => console.log(err));
     //}else{
@@ -163,7 +163,6 @@ function CardPresenca() {
               boxShadow:
                 "0 2px 4px -2px rgba(0,0,0,0.24), 0 4px 24px -2px rgba(0, 0, 0, 0.2)",
             }}
-
             key={user.Id}
           >
 
@@ -173,7 +172,6 @@ function CardPresenca() {
               maxWidth={350}
               gap={1}
               sx={{ alignItems: "center", marginTop: 2.0, }}
-              key={user.Id}
             >
               <Box>
                 <Avatar
