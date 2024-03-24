@@ -24,9 +24,9 @@ const AlertMessage = ({ open, severity, content, handleClose }) => (
 );
 
 function Presenca() {
-    //const [latitude, setLatitude] = useState(null);
-    //const [longitude, setLongitude] = useState(null);
-    //const [error, setError] = useState(null);
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+    const [error, setError] = useState(null);
     const [userData, setUserData] = useState([]);
     const [loguserData, setLogUserData] = useState([]);
     const [userankData, setUserankData] = useState([]);
@@ -35,22 +35,25 @@ function Presenca() {
     const [alertContent, setAlertContent] = useState('');
 
     useEffect(() => {
-        //const getLocation = () => {
-        //  if (navigator.geolocation) {
-        //    navigator.geolocation.getCurrentPosition(
-        //      position => {
-        //        setLatitude(position.coords.latitude.toFixed(3));
-        //        setLongitude(position.coords.longitude.toFixed(3));
-        //      },
-        //      error => {
-        //        setError(error.message);
-        //      }
-        //    );
-        //  } else {
-        //    setError('Geolocation is not supported by this browser.');
-        //  }
-        //};
-        //getLocation();
+        const getLocation = () => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              position => {
+                setLatitude(position.coords.latitude.toFixed(3));
+                setLongitude(position.coords.longitude.toFixed(3));
+              },
+              error => {
+                setError(error.message);
+              }
+            );
+          } else {
+            setError('Geolocation is not supported by this browser.');
+            setAlertContent("Problemas ao definir a Geolocalização nesse navegador");
+            setAlertSeverity('error');
+            setAlertOpen(true);
+          }
+        };
+        getLocation();
         fetchData();
         fetchAttData();
     }, [userData, loguserData]);
@@ -60,6 +63,9 @@ function Presenca() {
             const response = await axios.get('http://15.228.155.72:8081/membros-presentes');
             setUserData(response.data);
         } catch (error) {
+            setAlertContent("Problemas ao buscar os membros presentes na API");
+            setAlertSeverity('error');
+            setAlertOpen(true);
             console.error('Erro ao buscar dados da API:', error);
         }
     };
@@ -69,6 +75,9 @@ function Presenca() {
             const response = await axios.get('http://15.228.155.72:8081/ranking-membros');
             setUserankData(response.data);
         } catch (error) {
+            setAlertContent("Problemas ao buscar os membros na API");
+            setAlertSeverity('error');
+            setAlertOpen(true);
             console.error('Erro ao buscar dados da API:', error);
         }
     };
@@ -78,7 +87,7 @@ function Presenca() {
     };
 
     const addUserData = (email, senha) => {
-        //if(latitude === -21.533 && longitude === -42.635){
+        if(latitude === -21.533 && longitude === -42.635){
         axios.post('http://15.228.155.72:8081/marcar-presenca', { email, senha })
             .then(res => {
                 const newUser = res.data; // ou qualquer outra resposta da sua API que contenha os dados do usuário que entrou
@@ -95,21 +104,23 @@ function Presenca() {
                 }
             })
             .catch(err => console.log(err));
-        //}else{
-        //  alert('É necessario estar na sede')
-        //}
+        }else{
+            setAlertContent("É necessario estar presente na sede para realizar o login");
+            setAlertSeverity('error');
+            setAlertOpen(true);
+        }
 
     };
 
     const subUserData = (Id) => {
-        //if(latitude === -21.533 && longitude === -42.635){
+        if(latitude === -21.533 && longitude === -42.635){
         axios.post('http://15.228.155.72:8081/marcar-saida', { Id }).then(res => {
             setUserData(userData.filter(user => user.Id !== Id));
         })
             .catch(err => console.log(err));
-        //}else{
-        //  alert('É necessario estar na sede')
-        //}
+        }else{
+          alert('É necessario estar na sede')
+        }
     };
 
     return (
