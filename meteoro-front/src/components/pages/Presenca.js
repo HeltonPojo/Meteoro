@@ -87,7 +87,7 @@ function Presenca() {
     };
 
     const addUserData = (email, senha) => {
-        if(latitude === -21.533 && longitude === -42.635){
+        if(parseFloat(latitude) === -21.533 && parseFloat(longitude) === -42.635){
         axios.post('https://meteoro.encautech.com:8081/marcar-presenca', { email, senha })
             .then(res => {
                 const newUser = res.data; // ou qualquer outra resposta da sua API que contenha os dados do usuário que entrou
@@ -111,9 +111,9 @@ function Presenca() {
         }
 
     };
-
+par
     const subUserData = (Id) => {
-        if(latitude === -21.533 && longitude === -42.635){
+        if(parseFloat(latitude) === -21.533 && parseFloat(longitude) === -42.635){
         axios.post('https://meteoro.encautech.com:8081/marcar-saida', { Id }).then(res => {
             setUserData(userData.filter(user => user.Id !== Id));
         })
