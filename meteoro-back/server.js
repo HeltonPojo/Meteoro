@@ -1,8 +1,15 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const fs = require('fs');
+const https = require('https');
 
 const app = express();
+const options = {
+    key: fs.readFileSync('../meteoro-front/privkey.pem'),
+    cert: fs.readFileSync('../meteoro-front/fullchain.pem')
+}
+
 app.use(express.json());
 app.use(cors());
 //opt/lampp/lampp/manager-linux-x64.run
@@ -152,6 +159,4 @@ app.get('/ranking-membros', (req, res) => {
     });
 });
 
-app.listen(8081, () => {
-    console.log("Ouvindo papai...");
-});
+https.createServer(options, app).listen(443);
