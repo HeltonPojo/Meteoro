@@ -60,7 +60,7 @@ function Presenca() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://15.228.155.72:8081/membros-presentes');
+            const response = await axios.get('https://meteoro.encautech.com:8081/membros-presentes');
             setUserData(response.data);
         } catch (error) {
             setAlertContent("Problemas ao buscar os membros presentes na API");
@@ -72,7 +72,7 @@ function Presenca() {
 
     const fetchAttData = async () => {
         try {
-            const response = await axios.get('http://15.228.155.72:8081/ranking-membros');
+            const response = await axios.get('https://meteoro.encautech.com:8081/ranking-membros');
             setUserankData(response.data);
         } catch (error) {
             setAlertContent("Problemas ao buscar os membros na API");
@@ -88,7 +88,7 @@ function Presenca() {
 
     const addUserData = (email, senha) => {
         if(latitude === -21.533 && longitude === -42.635){
-        axios.post('http://15.228.155.72:8081/marcar-presenca', { email, senha })
+        axios.post('https://meteoro.encautech.com:8081/marcar-presenca', { email, senha })
             .then(res => {
                 const newUser = res.data; // ou qualquer outra resposta da sua API que contenha os dados do usuário que entrou
                 // Verifica se a resposta do servidor é "Informações incorretas"
@@ -114,7 +114,7 @@ function Presenca() {
 
     const subUserData = (Id) => {
         if(latitude === -21.533 && longitude === -42.635){
-        axios.post('http://15.228.155.72:8081/marcar-saida', { Id }).then(res => {
+        axios.post('https://meteoro.encautech.com:8081/marcar-saida', { Id }).then(res => {
             setUserData(userData.filter(user => user.Id !== Id));
         })
             .catch(err => console.log(err));
