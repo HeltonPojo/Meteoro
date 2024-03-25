@@ -6,8 +6,8 @@ const https = require('https');
 
 const app = express();
 const options = {
-    key: fs.readFileSync('../meteoro-front/key.pem'),
-    cert: fs.readFileSync('../meteoro-front/cert.pem')
+    key: fs.readFileSync('../meteoro-front/privkey.pem'),
+    cert: fs.readFileSync('../meteoro-front/fullchain.pem')
 }
 
 app.use(express.json());
