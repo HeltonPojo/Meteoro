@@ -111,7 +111,7 @@ function Presenca() {
         }
 
     };
-par
+
     const subUserData = (Id) => {
         if(parseFloat(latitude) === -21.533 && parseFloat(longitude) === -42.635){
         axios.post('https://meteoro.encautech.com:8081/marcar-saida', { Id }).then(res => {
