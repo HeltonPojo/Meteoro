@@ -93,7 +93,7 @@ function Presenca() {
     const [loguserData, setLogUserData] = useState([]);
     const [userankData, setUserankData] = useState([]);
     const [alertOpen, setAlertOpen] = useState(false);
-    const [alertSeverity, setAlertSeverity] = useState('success'); // Padrão: sucesso
+    const [alertSeverity, setAlertSeverity] = useState('success'); 
     const [alertContent, setAlertContent] = useState('');
     const [search,setSearch]= useState([]);
     const [search2,setSearch2]= useState([]);
@@ -153,11 +153,10 @@ function Presenca() {
     };
 
     const addUserData = (email, senha) => {
-        if(parseFloat(latitude) === -21.533 && parseFloat(longitude) === -42.635){
+        if(latitude === '-21.533' && longitude === '-42.635'){
         axios.post('https://meteoro.encautech.com:8081/marcar-presenca', { email, senha })
             .then(res => {
-                const newUser = res.data; // ou qualquer outra resposta da sua API que contenha os dados do usuário que entrou
-                // Verifica se a resposta do servidor é "Informações incorretas"
+                const newUser = res.data;
                 if (res.data === "Informações incorretas") {
                     setAlertContent("As informações fornecidas estão incorretas. Este usuário já está logado");
                     setAlertSeverity('error');
@@ -179,13 +178,15 @@ function Presenca() {
     };
 
     const subUserData = (Id) => {
-       if(parseFloat(latitude) === -21.533 && parseFloat(longitude) === -42.635){
+       if(latitude === '-21.533' && longitude === '-42.635'){
         axios.post('https://meteoro.encautech.com:8081/marcar-saida', { Id }).then(res => {
             setUserData(userData.filter(user => user.Id !== Id));
         })
             .catch(err => console.log(err));
         }else{
-            alert('É necessario estar na sede')
+           setAlertContent("É necessario estar presente na sede para realizar o logout");
+           setAlertSeverity('error');
+           setAlertOpen(true);
         }
     };
  
