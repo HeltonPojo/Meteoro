@@ -11,8 +11,68 @@ import HeaderEncautech from "../HeaderEncautech";
 import FooterEncautech from "../FooterEncautech";
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
-
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+import InputAdornment from '@mui/material/InputAdornment';
 import axios from "axios";
+import HeaderResponsivo from "../HeaderResposivo";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: '#ffa500',
+      },
+      secondary: {
+        main: '#db562b',
+      },
+    },
+    props: {
+      MuiButton: {
+        size: 'large',
+      },
+      MuiButtonGroup: {
+        size: 'large',
+      },
+      MuiCheckbox: {
+        size: 'large',
+      },
+      MuiFab: {
+        size: 'large',
+      },
+      MuiFormControl: {
+        margin: 'dense',
+        size: 'large',
+      },
+      MuiFormHelperText: {
+        margin: 'dense',
+      },
+      MuiIconButton: {
+        size: 'large',
+      },
+      MuiInputBase: {
+        margin: 'dense',
+      },
+      MuiInputLabel: {
+        margin: 'dense',
+      },
+      MuiRadio: {
+        size: 'large',
+      },
+      MuiSwitch: {
+        size: 'large',
+      },
+      MuiTextField: {
+        margin: 'dense',
+        size: 'large',
+      },
+    },
+    shape: {
+      borderRadius: 16,
+    },
+  });
 
 // Componente funcional que renderiza o alerta
 const AlertMessage = ({ open, severity, content, handleClose }) => (
@@ -22,6 +82,8 @@ const AlertMessage = ({ open, severity, content, handleClose }) => (
         </Alert>
     </Collapse>
 );
+
+
 
 function Presenca() {
     const [latitude, setLatitude] = useState(null);
@@ -33,6 +95,10 @@ function Presenca() {
     const [alertOpen, setAlertOpen] = useState(false);
     const [alertSeverity, setAlertSeverity] = useState('success'); // Padrão: sucesso
     const [alertContent, setAlertContent] = useState('');
+    const [search,setSearch]= useState([]);
+    const [search2,setSearch2]= useState([]);
+
+
 
     useEffect(() => {
         const getLocation = () => {
@@ -105,29 +171,32 @@ function Presenca() {
             })
             .catch(err => console.log(err));
         }else{
-            setAlertContent("É necessario estar presente na sede para realizar o login");
-            setAlertSeverity('error');
-            setAlertOpen(true);
+           setAlertContent("É necessario estar presente na sede para realizar o login");
+           setAlertSeverity('error');
+           setAlertOpen(true);
         }
 
     };
 
     const subUserData = (Id) => {
-        if(parseFloat(latitude) === -21.533 && parseFloat(longitude) === -42.635){
+       if(parseFloat(latitude) === -21.533 && parseFloat(longitude) === -42.635){
         axios.post('https://meteoro.encautech.com:8081/marcar-saida', { Id }).then(res => {
             setUserData(userData.filter(user => user.Id !== Id));
         })
             .catch(err => console.log(err));
         }else{
-          alert('É necessario estar na sede')
+            alert('É necessario estar na sede')
         }
     };
+ 
 
     return (
         <Container fluid className='mx-0 px-0'>
             <Row className=' mx-0 px-0'>
                 <Col className=' mx-0 px-0' md="auto">
-                    <Sidebar />
+                    <Sidebar  />
+                    <HeaderResponsivo/>
+                    
                 </Col>
 
                 <Col>
@@ -141,7 +210,7 @@ function Presenca() {
 
                     <Row className='mx-0 px-0' >
 
-                        <Col className='d-flex justify-content-center align-items-start'>
+                        <Col className='d-flex justify-content-center align-items-start py-2'>
                             <div className="card-bg rounded-3 w-100 border d-flex flex-column">
                                 <div className="p-4 d-flex flex-column h-100">
                                     <div className="d-flex align-items-center justify-content-between">
@@ -153,27 +222,76 @@ function Presenca() {
                             </div>
                         </Col>
 
-                        <Col className='d-flex justify-content-center align-items-start '>
-                            <div className="overflow-scroll card-bg rounded-3 w-100 border d-flex flex-column" style={{ height: '86vh' }}>
+                        <Col className='d-flex justify-content-center align-items-start py-2'>
+                            <div className="overflow-auto card-bg rounded-3 w-100 border d-flex flex-column" style={{ height: '86vh' }}>
                                 <div className="p-4 d-flex flex-column h-100">
                                     <div className="d-flex align-items-center justify-content-between">
                                         <h4 className="m-0 h5 font-weight-bold text-dark">Pontos abertos</h4>
                                         <div className="py-1 px-2 bg-grey rounded-circle"><i className="fas fa-suitcase"></i></div>
                                     </div>
-                                    <CardPresenca userData={userData} subUserData={subUserData} />
+
+                                    <ThemeProvider theme={theme}>
+                                        <TextField
+                                            id="search-bar"
+                                            className="text"
+                                            fullWidth
+                                            variant="outlined"
+                                            placeholder="Procurar por nome..."
+                                            size="small"
+                                            value={search}
+                                            onChange={(e)=> setSearch(e.target.value)}
+                                            
+                                            InputProps={{
+                                                sx: { borderRadius: "12px", borderColor: "#ffa500",marginTop: 2.0, },
+                                                startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <SearchIcon style={{ fill: "#ffa500" }} />
+                                                </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </ThemeProvider>
+
+                                    <CardPresenca className=" d-flex justify-content-center" userData={userData} subUserData={subUserData} search={search} />
+
                                 </div>
                             </div>
                         </Col>
 
-                        <Col className='d-flex justify-content-center align-items-start '>
-                            <div className="overflow-scroll card-bg rounded-3 w-100 border d-flex flex-column" style={{ height: '86vh' }}>
+                        <Col className='d-flex justify-content-center align-items-start py-2'>
+                            <div className=" overflow-auto card-bg rounded-3 w-100 border d-flex flex-column " style={{ height: '86vh' }}>
                                 <div className="p-4 d-flex flex-column h-100">
                                     <div className="d-flex align-items-center justify-content-between">
                                         <h6 className="m-0 h5 font-weight-bold text-dark">Ranking de horas </h6>
                                         <div className=" rounded-circle bg-grey py-1 px-2"><i className="fas fa-user"></i></div>
                                     </div>
+                                
+                                    <ThemeProvider theme={theme}>
+                                        <TextField
+                                            id="search-bar"
+                                            className="text"
+                                            fullWidth
+                                            variant="outlined"
+                                            placeholder="Procurar por nome..."
+                                            size="small"
+                                            value={search2}
+                                            onChange={(e)=> setSearch2(e.target.value)}
+                                            
+                                            InputProps={{
+                                                sx: { borderRadius: "12px", borderColor: "#ffa500",marginTop: 2.0, },
+                                                startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <SearchIcon style={{ fill: "#ffa500" }} />
+                                                </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                    </ThemeProvider>
+
+                                <CardHorasFeitas  userankData={userankData} search2={search2} />
                                 </div>
-                                <CardHorasFeitas userankData={userankData} />
+
+
                             </div>
                         </Col>
                     </Row>

@@ -38,10 +38,12 @@ const StyledIconButton = styled(IconButton)(() => ({
   },
 }));
 
-function CardHorasFeita({ userankData }) {
+function CardHorasFeita({ userankData, search2 }) {
+
+  const usuarios = userankData.filter(user => user.Nome.toLowerCase().includes(search2) );
   return (
     <>
-      {userankData.map((user) => (
+      {usuarios.map((user) => (
         <Box
           display="flex"
           p={1.5}

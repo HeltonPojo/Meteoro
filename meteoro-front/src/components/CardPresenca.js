@@ -10,9 +10,6 @@ import Avatar from '@mui/material/Avatar';
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-import { orange } from '@mui/material/colors';
-
 import Relogio from "./Relogio";
 
 const theme = createTheme({
@@ -88,16 +85,18 @@ const tutorInfoStyles = () => ({
   },
 });
 
-function CardPresenca({ userData, subUserData }) {
+function CardPresenca({ userData, subUserData, search }) {
   function handleSair(event) {
     event.preventDefault();
     const Id = event.currentTarget.dataset.userId;
     subUserData(Id);
   }
 
+  const usuarios = userData.filter(user => user.Nome.toLowerCase().includes(search) );
+
   return (
     <>
-      {userData.map((user) => (
+      {usuarios.map((user) => (
         <ThemeProvider theme={theme}>
           <Card
             sx={{
