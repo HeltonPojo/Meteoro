@@ -152,8 +152,10 @@ function Presenca() {
         setAlertOpen(false);
     };
 
+    let locLatdiff = parseFloat(latitude) - (-21.533);
+    let locLongdiff = parseFloat(longitude) - (-42.636);
     const addUserData = (email, senha) => {
-        if(latitude === '-21.533' && longitude === '-42.636'){
+        if(locLatdiff < 0.002 && locLatdiff > -0.002 && locLongdiff < 0.002 && locLongdiff > -0.002){
         axios.post('https://meteoro.encautech.com:8081/marcar-presenca', { email, senha })
             .then(res => {
                 const newUser = res.data;
@@ -170,7 +172,7 @@ function Presenca() {
             })
             .catch(err => console.log(err));
         }else{
-           setAlertContent("É necessario estar presente na sede para realizar o login");
+           setAlertContent("É necessario estar presente na sede para realizar o login. Suas Coordenadas:"+ latitude+ " "+ longitude + " Deveria estar em: -21.533 -42.636");
            setAlertSeverity('error');
            setAlertOpen(true);
         }
@@ -178,13 +180,13 @@ function Presenca() {
     };
 
     const subUserData = (Id) => {
-       if(latitude === '-21.533' && longitude === '-42.636'){
+       if(locLatdiff < 0.002 && locLatdiff > -0.002 && locLongdiff < 0.002 && locLongdiff > -0.002){
         axios.post('https://meteoro.encautech.com:8081/marcar-saida', { Id }).then(res => {
             setUserData(userData.filter(user => user.Id !== Id));
         })
             .catch(err => console.log(err));
         }else{
-           setAlertContent("É necessario estar presente na sede para realizar o logout");
+           setAlertContent("É necessario estar presente na sede para realizar o logout. Suas Coordenadas:"+ latitude+ " "+ longitude + " Deveria estar em: -21.533 -42.636");
            setAlertSeverity('error');
            setAlertOpen(true);
         }
