@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Logo from '../img/file.jpeg'
+import Logo from '../img/Logo.png'
 
 function HeaderEncautech() {
   return (

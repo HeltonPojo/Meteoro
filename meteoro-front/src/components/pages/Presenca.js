@@ -23,10 +23,10 @@ const theme = createTheme({
     palette: {
       mode: 'light',
       primary: {
-        main: '#2b5565',
+        main: '#ffa500',
       },
       secondary: {
-        main: '#224449',
+        main: '#db562b',
       },
     },
     props: {
@@ -245,10 +245,10 @@ function Presenca() {
                                             onChange={(e)=> setSearch(e.target.value)}
                                             
                                             InputProps={{
-                                                sx: { borderRadius: "12px", borderColor: "#2b5565",marginTop: 2.0, },
+                                                sx: { borderRadius: "12px", borderColor: "#ffa500",marginTop: 2.0, },
                                                 startAdornment: (
                                                 <InputAdornment position="start">
-                                                    <SearchIcon style={{ fill: "#2b5565" }} />
+                                                    <SearchIcon style={{ fill: "#ffa500" }} />
                                                 </InputAdornment>
                                                 ),
                                             }}
@@ -281,10 +281,10 @@ function Presenca() {
                                             onChange={(e)=> setSearch2(e.target.value)}
                                             
                                             InputProps={{
-                                                sx: { borderRadius: "12px", borderColor: "#2b5565",marginTop: 2.0, },
+                                                sx: { borderRadius: "12px", borderColor: "#ffa500",marginTop: 2.0, },
                                                 startAdornment: (
                                                 <InputAdornment position="start">
-                                                    <SearchIcon style={{ fill: "#2b5565" }} />
+                                                    <SearchIcon style={{ fill: "#ffa500" }} />
                                                 </InputAdornment>
                                                 ),
                                             }}
