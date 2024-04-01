@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-      <CDBSidebar className=" d-none d-sm-block " textColor="#fff" backgroundColor="#ffa500" style={{ height: '100vh' }}>
+      <CDBSidebar className=" d-none d-sm-block " textColor="#fff" backgroundColor="#2b5565" style={{ height: '100vh' }}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>METEORO</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>

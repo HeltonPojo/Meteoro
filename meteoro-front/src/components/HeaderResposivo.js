@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 
 function HeaderResponsivo() {
   return (
-    <Navbar collapseOnSelect expand="lg" className="d-sm-none navbar-dark px-1" style={{ backgroundColor:"#ffa500" }}>
+    <Navbar collapseOnSelect expand="lg" className="d-sm-none navbar-dark px-1" style={{ backgroundColor:"#2b5565" }}>
         <Navbar.Brand className="mx-5" prefix={<i className="fa fa-bars" />}>METEORO</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
