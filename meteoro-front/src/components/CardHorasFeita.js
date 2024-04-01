@@ -63,7 +63,7 @@ function CardHorasFeita({ userankData, search2 }) {
               sx={{ borderRadius: 3, width: 48, height: 48 }}
             >E</Avatar>
           </Box>
-          <Box sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
+          <Box sx={{ flex: "auto" }}>
             <Typography>{user.Nome}</Typography>
             <Typography>{user.Cargo}</Typography>
             <>Horas Cumpridas: {user.horas}</>

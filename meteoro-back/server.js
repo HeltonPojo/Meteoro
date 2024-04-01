@@ -25,13 +25,13 @@ const db = mysql.createConnection({
 app.post('/login', (req, res) => {
     const { email, senha } = req.body;
     email = email.toLowerCase();
-    const sql = "SELECT Id, Email, Senha FROM Usuario WHERE Email = ? AND Senha = ? AND esta_na_sede = 1";
+    const sql = "SELECT Id, Email, Nome, horas, Cargo, estalecadas FROM Usuario WHERE Email = ? AND Senha = ?";
     db.query(sql, [email, senha], (err, data) => {
         if (err) return res.json("Erro no Login: ", err);
         if (data.length > 0) {
-            return res.json("Login Efetuado")
+            return res.json(data);
         } else {
-            return res.json("Informações incorretas")
+            return res.json("Informações incorretas");
         }
     })
 })
@@ -148,7 +148,7 @@ app.get('/membros-presentes', (req, res) => {
 });
 
 app.get('/ranking-membros', (req, res) => {
-    const sql = "SELECT Id, Nome, Email, Cargo, horas FROM Usuario ORDER BY horas DESC;";
+    const sql = "SELECT Id, Nome, Email, Cargo, horas FROM Usuario WHERE isAdmin = 0 ORDER BY horas DESC;";
     db.query(sql, (err, data) => {
         if (err) return res.json("Erro no Consulta Ranking dos  Membros: ", err);
         if (data.length > 0) {
