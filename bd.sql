@@ -18,6 +18,8 @@ Id INTEGER PRIMARY KEY,
 Entrada DATETIME NOT NULL,
 Saida DATETIME NOT NULL,
 IdUsuario INTEGER,
+Atividade VARCHAR(255),
+Departamento VARCHAR(100),
 FOREIGN KEY(IdUsuario) REFERENCES Usuario (Id)
 );
 

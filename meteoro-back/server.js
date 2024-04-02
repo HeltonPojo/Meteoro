@@ -38,10 +38,10 @@ app.post('/login', (req, res) => {
 
 app.post('/marcar-presenca', (req, res) => {
     // Dados recebidos do corpo da requisição
-    const { email, senha } = req.body;
+    const { email, senha, atividade, departamento } = req.body;
 
     // Consulta para inserir um novo registro na tabela 'Presenca'
-    const sqlInsert = "INSERT INTO Horarios (IdUsuario, Entrada) VALUES (?, NOW())";
+    const sqlInsert = "INSERT INTO Horarios (IdUsuario, Entrada, Atividade, Departamento) VALUES (?, DATE_SUB(NOW(), INTERVAL 3 HOUR), ?, ?)";
     const sqlUpdatePresente = "UPDATE Usuario SET esta_na_sede = 1 WHERE Id = ?";
 
     // Consulta para verificar se o usuário existe
@@ -59,7 +59,7 @@ app.post('/marcar-presenca', (req, res) => {
                     return res.json("Erro ao Atualizar Presenca do Usuario: ", upErr);
                 }
             });
-            db.query(sqlInsert, [data[0].Id], (insertErr, insertData) => {
+            db.query(sqlInsert, [data[0].Id, atividade, departamento], (insertErr, insertData) => {
                 if (insertErr) {
                     return res.json("Erro ao Inserir nova Entrada em Horarios: ", insertErr);
                 }
@@ -78,7 +78,7 @@ app.post('/marcar-saida', (req, res) => {
 
 
     // Consulta para inserir um novo registro na tabela 'Presenca'
-    const sqlUpdateSaida = "UPDATE Horarios SET Saida = NOW() WHERE isnull(Saida) AND IdUsuario = ?";
+    const sqlUpdateSaida = "UPDATE Horarios SET Saida = DATE_SUB(NOW(), INTERVAL 3 HOUR) WHERE isnull(Saida) AND IdUsuario = ?";
     const sqlUpdatePresente = "UPDATE Usuario SET esta_na_sede = 0 , horas  = ADDTIME(horas, ?) WHERE Id = ?";
 
     // Consulta para verificar se o usuário existe

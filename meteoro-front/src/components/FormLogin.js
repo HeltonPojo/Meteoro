@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -70,10 +74,13 @@ const theme = createTheme({
 function Formlogin({ addUserData }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [atividade, setAtividade] = useState('');
+  const [departamento, setDepartamento] = useState('');
+  const [open, setOpen] = useState(false);
 
   function handelEntrar(event) {
     event.preventDefault();
-    addUserData(email, senha);
+    addUserData(email, senha, atividade, departamento);
   }
 
   return (
@@ -103,6 +110,39 @@ function Formlogin({ addUserData }) {
                 autoComplete="Email"
                 autoFocus
                 onChange={e => setEmail(e.target.value)}
+              />
+              <FormControl required fullWidth autoFocus>
+                <InputLabel id="dpto">Departamento</InputLabel>
+                <Select
+                  id="Departamento"
+                  label="Departamento"
+                  labelId="dpto"
+                  autoComplete="Departamento"
+                  onChange={(e) => setDepartamento(e)}
+                  listboxOpen={open}
+                  open={open}
+                  onOpen={() => setOpen(true)}
+                  onClose={() => setOpen(false)}
+                >
+                  <MenuItem value="Comercial">Comercial</MenuItem>
+                  <MenuItem value="Financeiro">Financeiro</MenuItem>
+                  <MenuItem value="Gestão de Pessoas">Gestão de Pessoas</MenuItem>
+                  <MenuItem value="Marketing">Marketing</MenuItem>
+                  <MenuItem value="Projetos">Projetos</MenuItem>
+                  <MenuItem value="Não Relacionado a Encautech">Não Relacionado a Encautech</MenuItem>
+                </Select>
+              </FormControl>
+              <TextField
+                margin="normal"
+                type='text'
+                required
+                fullWidth
+                id="Atividade"
+                label="Atividade"
+                name="Atividade"
+                autoComplete="Atividade"
+                autoFocus
+                onChange={e => setAtividade(e.target.value)}
               />
               <TextField
                 margin="normal"

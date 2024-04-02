@@ -126,7 +126,7 @@ function CardPresenca({ userData, subUserData, search }) {
                   sx={{ borderRadius: 3, width: 48, height: 48 }}
                 >E</Avatar>
               </Box>
-              <div sx={{ flex: "auto" }} useStyles={tutorInfoStyles}>
+              <div sx={{ flex: "auto" }}>
                 <Typography>{user.Nome}</Typography>
                 <Typography>{user.Cargo}</Typography>
               </div>
