@@ -80,7 +80,6 @@ function Formlogin({ addUserData }) {
 
   function handelEntrar(event) {
     event.preventDefault();
-    console.log(email, senha, atividade, departamento);
     addUserData(email, senha, atividade, departamento);
   }
 
