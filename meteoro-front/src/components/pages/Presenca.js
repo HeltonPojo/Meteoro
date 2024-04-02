@@ -156,6 +156,8 @@ function Presenca() {
     let locLongdiff = parseFloat(longitude) - (-42.636);
     const addUserData = (email, senha, atividade, departamento) => {
         if((locLatdiff < 0.002 && locLatdiff > -0.002 && locLongdiff < 0.002 && locLongdiff > -0.002) || email === 'teste@encautech.com'){
+          console.log(atividade);
+          console.log(departamento);
         axios.post('https://meteoro.encautech.com:8081/marcar-presenca', { email, senha, atividade, departamento })
             .then(res => {
                 const newUser = res.data;

@@ -80,6 +80,7 @@ function Formlogin({ addUserData }) {
 
   function handelEntrar(event) {
     event.preventDefault();
+    console.log(email, senha, atividade, departamento);
     addUserData(email, senha, atividade, departamento);
   }
 
@@ -118,7 +119,7 @@ function Formlogin({ addUserData }) {
                   label="Departamento"
                   labelId="dpto"
                   autoComplete="Departamento"
-                  onChange={(e) => setDepartamento(e)}
+                  onChange={(e) => setDepartamento(e.target.value)}
                   listboxOpen={open}
                   open={open}
                   onOpen={() => setOpen(true)}

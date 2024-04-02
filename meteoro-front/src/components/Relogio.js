@@ -15,7 +15,7 @@ function Relogio({ horas, Entrada }) {
     var minutos = Math.floor((diffHoras - horasf) * 60);
     var segundos = Math.floor(((diffHoras - horasf) * 60 - minutos) * 60);
 
-    var horaFormatada = `${String(horasf).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+    var horaFormatada = `${String(horasf - 3).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
 
     const [hora, setHora] = useState(horaFormatada);
 
