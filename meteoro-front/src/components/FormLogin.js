@@ -119,8 +119,8 @@ function Formlogin({ addUserData }) {
                   labelId="dpto"
                   autoComplete="Departamento"
                   onChange={(e) => setDepartamento(e.target.value)}
-                  listboxOpen={open}
                   open={open}
+                  value={departamento}
                   onOpen={() => setOpen(true)}
                   onClose={() => setOpen(false)}
                 >
