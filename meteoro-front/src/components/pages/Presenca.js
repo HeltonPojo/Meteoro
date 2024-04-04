@@ -143,7 +143,7 @@ function Presenca() {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [userData, userankData]);
 
   const fetchData = async () => {
     try {
