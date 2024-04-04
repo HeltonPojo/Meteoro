@@ -163,9 +163,11 @@ app.get('/ranking-membros', (req, res) => {
 });
 
 const serverHttps = https.createServer(options, app);
-const io = new Server(serverHttps,{
+const io = new Server(serverHttps, {
     cors: {
-        origin: "*"
+      origin: '*',
+      methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+      allowedHeaders: ['Content-Type', 'Authorization'] 
     }
 });
 
