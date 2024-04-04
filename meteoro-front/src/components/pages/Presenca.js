@@ -140,10 +140,7 @@ function Presenca() {
       fetchAttData();
     });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [userData, userankData]);
+  }, [userData]);
 
   const fetchData = async () => {
     try {
