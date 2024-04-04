@@ -165,8 +165,7 @@ app.get('/ranking-membros', (req, res) => {
 const serverHttps = https.createServer(options, app);
 const io = new Server(serverHttps,{
     cors: {
-        origin: "https://meteoro.encautech.com:3000",
-        methods: ["GET", "POST"]
+        origin: "*"
     }
 });
 
