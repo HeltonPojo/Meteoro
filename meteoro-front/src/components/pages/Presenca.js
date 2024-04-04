@@ -103,11 +103,13 @@ function Presenca() {
   const [alertContent, setAlertContent] = useState('');
   const [search, setSearch] = useState([]);
   const [search2, setSearch2] = useState([]);
-
-
-
+  
+  
+  
   useEffect(() => {
     socket.on('connect', () => {
+      fetchData();
+      fetchAttData();
       console.log('Conectado com o socket do servidor');
     })
     const getLocation = () => {
@@ -141,7 +143,7 @@ function Presenca() {
     return () => {
       socket.disconnect();
     };
-  }, [userData, loguserData]);
+  }, []);
 
   const fetchData = async () => {
     try {
