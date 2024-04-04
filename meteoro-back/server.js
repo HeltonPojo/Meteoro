@@ -3,6 +3,7 @@ const mysql = require('mysql');
 const cors = require('cors');
 const fs = require('fs');
 const https = require('https');
+const { Server } = require('socket.io');
 
 const app = express();
 const options = {
@@ -12,8 +13,8 @@ const options = {
 
 app.use(express.json());
 app.use(cors());
-//opt/lampp/lampp/manager-linux-x64.run
-//systemctl status mysql
+
+//cd /opt/lampp/; ./manager-linux-x64.run
 
 const db = mysql.createConnection({
     host: "database.croi64eak66x.sa-east-1.rds.amazonaws.com",
@@ -63,7 +64,8 @@ app.post('/marcar-presenca', (req, res) => {
                 if (insertErr) {
                     return res.json("Erro ao Inserir nova Entrada em Horarios: ", insertErr);
                 }
-                return res.json(data);
+                io.emit('NovaPresencaMarcada');
+                return res.json("Presenca Marcada Com Sucesso");
             });
         } else {
             return res.json("Informações incorretas");
@@ -123,6 +125,7 @@ app.post('/marcar-saida', (req, res) => {
                             if (upErr) {
                                 return res.json("Erro no Update Presenca no Usuario: ", upErr);
                             }
+                            io.emit('NovaSaidaMarcada');
                             return res.json("Saida marcada com sucesso");
                         });
                     });
@@ -135,7 +138,7 @@ app.post('/marcar-saida', (req, res) => {
 });
 
 app.get('/membros-presentes', (req, res) => {
-//adicionar nome no Banco de dados
+    //adicionar nome no Banco de dados
     const sql = "SELECT Usuario.Id as Id, Nome, Email, Cargo, horas, Entrada FROM Usuario INNER JOIN Horarios on Usuario.Id=Horarios.IdUsuario WHERE esta_na_sede = 1 AND isnull(Horarios.Saida)";
     db.query(sql, (err, data) => {
         if (err) return res.json("Erro no Consulta Membros Presentes: ", err);
@@ -159,4 +162,14 @@ app.get('/ranking-membros', (req, res) => {
     });
 });
 
-https.createServer(options, app).listen(8081);
+const serverHttps = https.createServer(options, app);
+const io = new Server(serverHttps);
+
+io.on("connection", (socket) => {
+    console.log('Cliente conectado');
+    io.on("disconnection", () => {
+        console.log('Cliente desconectado');
+    })
+});
+
+serverHttps.listen(8081);
