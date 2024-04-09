@@ -129,6 +129,7 @@ function Formlogin({ addUserData }) {
                   <MenuItem value="Gestão de Pessoas">Gestão de Pessoas</MenuItem>
                   <MenuItem value="Marketing">Marketing</MenuItem>
                   <MenuItem value="Projetos">Projetos</MenuItem>
+                  <MenuItem value="Conselho">Conselho</MenuItem>
                   <MenuItem value="Não Relacionado a Encautech">Não Relacionado a Encautech</MenuItem>
                 </Select>
               </FormControl>

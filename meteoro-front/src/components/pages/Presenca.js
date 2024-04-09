@@ -20,7 +20,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import axios from "axios";
 import io from "socket.io-client"
 
-const api = 'https://meteoro.encautech.com:8081';
+const api = 'https://ponto.encautech.com:8081';
 //const api = 'http://localhost:8081';
 
 const socket = io(api); 
