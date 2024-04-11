@@ -90,7 +90,7 @@ function Formlogin({ addUserData }) {
           <CssBaseline />
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 2,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -110,8 +110,10 @@ function Formlogin({ addUserData }) {
                 autoComplete="Email"
                 autoFocus
                 onChange={e => setEmail(e.target.value)}
+                sx={{ mb: 2.5}}
               />
-              <FormControl required fullWidth autoFocus>
+
+              <FormControl  sx={{ mb: 0.5}} required fullWidth autoFocus>
                 <InputLabel id="dpto">Departamento</InputLabel>
                 <Select
                   id="Departamento"
@@ -130,9 +132,11 @@ function Formlogin({ addUserData }) {
                   <MenuItem value="Marketing">Marketing</MenuItem>
                   <MenuItem value="Projetos">Projetos</MenuItem>
                   <MenuItem value="Conselho">Conselho</MenuItem>
+                  <MenuItem value="Presidencia">Presidencia</MenuItem>
                   <MenuItem value="Não Relacionado a Encautech">Não Relacionado a Encautech</MenuItem>
                 </Select>
               </FormControl>
+              
               <TextField
                 margin="normal"
                 type='text'
