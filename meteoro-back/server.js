@@ -6,10 +6,7 @@ const https = require('https');
 const { Server } = require('socket.io');
 
 const app = express();
-const options = {
-    key: fs.readFileSync('../../privkey.pem'),
-    cert: fs.readFileSync('../../fullchain.pem')
-}
+const production = true;
 
 app.use(express.json());
 app.use(cors());
@@ -40,14 +37,14 @@ app.post('/login', (req, res) => {
 app.post('/marcar-presenca', (req, res) => {
     // Dados recebidos do corpo da requisição
     const { email, senha, atividade, departamento } = req.body;
-
+    
     // Consulta para inserir um novo registro na tabela 'Presenca'
     const sqlInsert = "INSERT INTO Horarios (IdUsuario, Entrada, Atividade, Departamento) VALUES (?, DATE_SUB(NOW(), INTERVAL 3 HOUR), ?, ?)";
     const sqlUpdatePresente = "UPDATE Usuario SET esta_na_sede = 1 WHERE Id = ?";
-
+    
     // Consulta para verificar se o usuário existe
     const sqlSelectUser = "SELECT Id, Nome, Email, Cargo, horas, esta_na_sede FROM Usuario WHERE Email = ? AND Senha = ?";
-
+    
     // Executa a consulta para verificar o usuário
     db.query(sqlSelectUser, [email, senha], (err, data) => {
         if (err) {
@@ -77,12 +74,12 @@ app.post('/marcar-presenca', (req, res) => {
 app.post('/marcar-saida', (req, res) => {
     // Dados recebidos do corpo da requisição
     const { Id } = req.body;
-
-
+    
+    
     // Consulta para inserir um novo registro na tabela 'Presenca'
     const sqlUpdateSaida = "UPDATE Horarios SET Saida = DATE_SUB(NOW(), INTERVAL 3 HOUR) WHERE isnull(Saida) AND IdUsuario = ?";
     const sqlUpdatePresente = "UPDATE Usuario SET esta_na_sede = 0 , horas  = ADDTIME(horas, ?) WHERE Id = ?";
-
+    
     // Consulta para verificar se o usuário existe
     const sqlSelectUser = "SELECT Id, esta_na_sede FROM Usuario WHERE Id = ?";
     const sqlSelectHora = "SELECT Id, Entrada FROM Horarios WHERE isnull(Saida) AND IdUsuario = ?";
@@ -102,7 +99,7 @@ app.post('/marcar-saida', (req, res) => {
                     return res.json("Erro no Select Horario: ", slHErr);
                 }
                 entrada = slHora[0].Entrada;
-
+                
                 db.query(sqlUpdateSaida, [data[0].Id], (upSErr, upSData) => {
                     if (upSErr) {
                         return res.json("Erro no Update Saida: ", upSErr);
@@ -111,7 +108,7 @@ app.post('/marcar-saida', (req, res) => {
                         if (slHSErr) {
                             return res.json("Erro na consulta do Select Saida Horarios: ", slHSErr);
                         }
-
+                        
                         saida = slHSaida[0].Saida;
 
                         var diffMillis = saida - entrada;
@@ -119,7 +116,7 @@ app.post('/marcar-saida', (req, res) => {
                         var horas = Math.floor(diffHoras);
                         var minutos = Math.floor((diffHoras - horas) * 60);
                         var segundos = Math.floor(((diffHoras - horas) * 60 - minutos) * 60);
-
+                        
                         var horaFormatada = `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
                         db.query(sqlUpdatePresente, [horaFormatada, data[0].Id], (upErr, upData) => {
                             if (upErr) {
@@ -162,20 +159,44 @@ app.get('/ranking-membros', (req, res) => {
     });
 });
 
-const serverHttps = https.createServer(options, app);
-const io = new Server(serverHttps, {
-    cors: {
-      origin: '*',
-      methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-      allowedHeaders: ['Content-Type', 'Authorization'] 
+if(production){
+    const options = {
+        key: fs.readFileSync('../../privkey.pem'),
+        cert: fs.readFileSync('../../fullchain.pem')
     }
-});
+    const serverHttps = https.createServer(options, app);
+    const io = new Server(serverHttps, {
+        cors: {
+            origin: '*',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+            allowedHeaders: ['Content-Type', 'Authorization'] 
+        }
+    });
 
-io.on("connection", (socket) => {
-    console.log('Cliente conectado');
-    io.on("disconnection", () => {
-        console.log('Cliente desconectado');
-    })
-});
+    io.on("connection", (socket) => {
+        console.log('Cliente conectado');
+        io.on("disconnection", () => {
+            console.log('Cliente desconectado');
+        })
+    });
 
-serverHttps.listen(8081);
+    serverHttps.listen(8081);
+}else{
+    const io = new Server({
+        cors: {
+            origin: '*',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+            allowedHeaders: ['Content-Type', 'Authorization'] 
+        }
+    });
+
+    io.on("connection", (socket) => {
+        console.log('Cliente conectado');
+        io.on("disconnection", () => {
+            console.log('Cliente desconectado');
+        })
+    });
+    app.listen(8081, () => {
+        console.log(`Ouvindo papais`)
+      })
+}

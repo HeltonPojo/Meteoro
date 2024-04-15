@@ -112,24 +112,24 @@ function Presenca() {
       fetchAttData();
       console.log('Conectado com o socket do servidor');
     })
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            setLatitude(position.coords.latitude.toFixed(3));
-            setLongitude(position.coords.longitude.toFixed(3));
-          },
-          error => {
-            setError(error.message);
-          }
-        );
-      } else {
-        setError('Geolocation is not supported by this browser.');
-        setAlertContent("Problemas ao definir a Geolocalização nesse navegador");
-        setAlertSeverity('error');
-        setAlertOpen(true);
-      }
-    };
+    //const getLocation = () => {
+    //  if (navigator.geolocation) {
+    //    navigator.geolocation.getCurrentPosition(
+    //      position => {
+    //        setLatitude(position.coords.latitude.toFixed(3));
+    //        setLongitude(position.coords.longitude.toFixed(3));
+    //      },
+    //      error => {
+    //        setError(error.message);
+    //      }
+    //    );
+    //  } else {
+    //    setError('Geolocation is not supported by this browser.');
+    //    setAlertContent("Problemas ao definir a Geolocalização nesse navegador");
+    //    setAlertSeverity('error');
+    //    setAlertOpen(true);
+    //  }
+    //};
     getLocation();
     socket.on('NovaPresencaMarcada', () => {
       fetchData();
@@ -170,15 +170,15 @@ function Presenca() {
     setAlertOpen(false);
   };
 
-  let locLatdiff = parseFloat(latitude) - (-21.533);
-  let locLongdiff = parseFloat(longitude) - (-42.636);
+  //let locLatdiff = parseFloat(latitude) - (-21.533);
+  //let locLongdiff = parseFloat(longitude) - (-42.636);
   const addUserData = (email, senha, atividade, departamento) => {
-    if ((locLatdiff < 0.002 && locLatdiff > -0.002 && locLongdiff < 0.002 && locLongdiff > -0.002) || email === 'teste@encautech.com') {
+    //if ((locLatdiff < 0.002 && locLatdiff > -0.002 && locLongdiff < 0.002 && locLongdiff > -0.002) || email === 'teste@encautech.com') {
       axios.post(api + '/marcar-presenca', { email, senha, atividade, departamento })
         .then(res => {
           const newUser = res.data;
           if (res.data === "Informações incorretas") {
-            setAlertContent("As informações fornecidas estão incorretas. Este usuário já está logado");
+            setAlertContent("As informações fornecidas estão incorretas ou este usuário já está logado");
             setAlertSeverity('error');
             setAlertOpen(true);
           } else {
@@ -189,25 +189,25 @@ function Presenca() {
           }
         })
         .catch(err => console.log(err));
-    } else {
-      setAlertContent("É necessario estar presente na sede para realizar o login. Suas Coordenadas:" + latitude + " " + longitude + " Deveria estar em: -21.533 -42.636");
-      setAlertSeverity('error');
-      setAlertOpen(true);
-    }
+    //} else {
+    //  setAlertContent("É necessario estar presente na sede para realizar o login. Suas Coordenadas:" + latitude + " " + longitude + " Deveria estar em: -21.533 -42.636");
+    //  setAlertSeverity('error');
+    //  setAlertOpen(true);
+    //}
 
   };
 
   const subUserData = (Id) => {
-    if ((locLatdiff < 0.002 && locLatdiff > -0.002 && locLongdiff < 0.002 && locLongdiff > -0.002) || Id === '0') {
+    //if ((locLatdiff < 0.002 && locLatdiff > -0.002 && locLongdiff < 0.002 && locLongdiff > -0.002) || Id === '0') {
       axios.post(api + '/marcar-saida', { Id }).then(res => {
         setUserData(userData.filter(user => user.Id !== Id));
       })
         .catch(err => console.log(err));
-    } else {
-      setAlertContent("É necessario estar presente na sede para realizar o logout. Suas Coordenadas:" + latitude + " " + longitude + " Deveria estar em: -21.533 -42.636");
-      setAlertSeverity('error');
-      setAlertOpen(true);
-    }
+    //} else {
+    //  setAlertContent("É necessario estar presente na sede para realizar o logout. Suas Coordenadas:" + latitude + " " + longitude + " Deveria estar em: -21.533 -42.636");
+    //  setAlertSeverity('error');
+    //  setAlertOpen(true);
+    //}
   };
 //sad
 
