@@ -130,7 +130,7 @@ function Presenca() {
     //    setAlertOpen(true);
     //  }
     //};
-    getLocation();
+    //getLocation();
     socket.on('NovaPresencaMarcada', () => {
       fetchData();
     });
